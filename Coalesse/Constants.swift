@@ -16,10 +16,3 @@ struct Colors {
 	let grayColor = UIColor(red: 212.0/255.0, green: 212.0/255.0, blue: 212.0/255.0, alpha: 1.0)
 	let offWhiteColor = UIColor(red: 247.0/255.0, green: 247.0/255.0, blue: 247.0/255.0, alpha: 1.0)
 }
-
-struct Fonts {
-	let body = UIFont(name:"SourceSansPro-Regular", size:13.0);
-	let bodyBold = UIFont(name:"SourceSansPro-Bold", size:13.0);
-	let caption = UIFont(name:"SourceSansPro-Regular", size:11.0);
-	let header = UIFont(name:"SourceSansPro-Regular", size:17.0);
-}

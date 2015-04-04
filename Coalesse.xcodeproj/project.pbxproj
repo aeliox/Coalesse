@@ -24,6 +24,8 @@
 		386E1D8C1AC4C84200D1F265 /* SavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386E1D8B1AC4C84200D1F265 /* SavedViewController.swift */; };
 		386E1D8E1AC4C85100D1F265 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386E1D8D1AC4C85100D1F265 /* SettingsViewController.swift */; };
 		386E1D901AC4C86000D1F265 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386E1D8F1AC4C86000D1F265 /* AboutViewController.swift */; };
+		3891E6341ACE768C00B5174A /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3891E6331ACE768C00B5174A /* Views.swift */; };
+		389922491ACFB7C9004CB793 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389922481ACFB7C9004CB793 /* Helpers.swift */; };
 		38F76D401AC92769005F4852 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F76D3F1AC92769005F4852 /* WebViewController.swift */; };
 		38F76D441AC927C6005F4852 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F76D431AC927C6005F4852 /* WebKit.framework */; };
 /* End PBXBuildFile section */
@@ -94,6 +96,8 @@
 		386E1D8B1AC4C84200D1F265 /* SavedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedViewController.swift; sourceTree = "<group>"; };
 		386E1D8D1AC4C85100D1F265 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		386E1D8F1AC4C86000D1F265 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		3891E6331ACE768C00B5174A /* Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
+		389922481ACFB7C9004CB793 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		38F76D3F1AC92769005F4852 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		38F76D431AC927C6005F4852 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -202,6 +206,7 @@
 		3803BA6D1AB34F9700EE1C52 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3891E6331ACE768C00B5174A /* Views.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 				38F76D451AC927D7005F4852 /* Frameworks */,
 				3803BA6F1AB34FA600EE1C52 /* Vendors */,
 				3803BA891AB3522C00EE1C52 /* Constants.swift */,
+				389922481ACFB7C9004CB793 /* Helpers.swift */,
 				3803BA8D1AB3584A00EE1C52 /* MenuTransitionManager.swift */,
 				380B82451AB56641008F8BC6 /* ContainerTransitionManager.swift */,
 			);
@@ -369,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3803BA4E1AB34F2B00EE1C52 /* MainViewController.swift in Sources */,
+				389922491ACFB7C9004CB793 /* Helpers.swift in Sources */,
 				3803BA4C1AB34F2B00EE1C52 /* AppDelegate.swift in Sources */,
 				386E1D901AC4C86000D1F265 /* AboutViewController.swift in Sources */,
 				380B82461AB56641008F8BC6 /* ContainerTransitionManager.swift in Sources */,
@@ -377,6 +384,7 @@
 				380B82441AB56441008F8BC6 /* CustomizeViewController.swift in Sources */,
 				38F76D401AC92769005F4852 /* WebViewController.swift in Sources */,
 				3803BA8E1AB3584A00EE1C52 /* MenuTransitionManager.swift in Sources */,
+				3891E6341ACE768C00B5174A /* Views.swift in Sources */,
 				3803BA8A1AB3522C00EE1C52 /* Constants.swift in Sources */,
 				3803BA8C1AB3583400EE1C52 /* MenuViewController.swift in Sources */,
 				386E1D881AC4C44900D1F265 /* StandardViewController.swift in Sources */,

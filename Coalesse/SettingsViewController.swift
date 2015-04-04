@@ -27,4 +27,16 @@ class SettingsViewController: UITableViewController {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
+	
+	
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		switch indexPath.row {
+		case 1:
+			NSNotificationCenter.defaultCenter().postNotificationName("ShowWebView", object: NSURL(string: "http://www.coalesse.com/privacy"))
+		case 2:
+			NSNotificationCenter.defaultCenter().postNotificationName("ShowWebView", object: NSURL(string: "http://www.coalesse.com"))
+		default:
+			let z = 0
+		}
+	}
 }
