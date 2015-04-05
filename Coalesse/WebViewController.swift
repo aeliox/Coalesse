@@ -41,7 +41,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 		
 		let closeButton = UIBarButtonItem(image: UIImage(named: "icon_close"), style: .Plain, target: self, action: "closeAction")
 		closeButton.imageInsets = UIEdgeInsetsMake(0, -10, 0, 0)
-		let shareButton = UIBarButtonItem(image: UIImage(named: "icon_share"), style: .Plain, target: self, action: "openAction")
+		let shareButton = UIBarButtonItem(image: UIImage(named: "icon_web_share"), style: .Plain, target: self, action: "openAction")
 		shareButton.imageInsets = UIEdgeInsetsMake(0, 0, 0, -10)
 		
 		self.navigationItem.rightBarButtonItems = [closeButton,shareButton]

@@ -15,10 +15,14 @@ class CustomizeViewController: UIViewController {
 	@IBOutlet weak var mainImageView: GPUImageView!
 	@IBOutlet weak var chairFinishToggle: UISegmentedControl!
 	@IBOutlet weak var gradientCreatorView: GradientCreatorView!
+	@IBOutlet weak var colorPickerView: ColorPickerView!
+	@IBOutlet weak var _colorPickerViewHidingTopConstraint: NSLayoutConstraint!
 	
 	
-	var gradientColors: [UIColor] = []
+	var gradientColors: [UIColor]?
 	var gradientOffsets: [Float] = []
+	
+	var swatchEditing: SwatchThumbnail?
 	
 	var gpuChair: GPUImagePicture?
 	var gpuGradient: GPUImagePicture?
@@ -28,16 +32,21 @@ class CustomizeViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		gradientCreatorView.startColor = UIColor.random()
-		gradientCreatorView.endColor = UIColor.random()
+		if gradientColors == nil {
+			gradientColors = [UIColor.random(),UIColor.random()]
+		}
+		
+		gradientCreatorView.startColor = gradientColors![0]
+		gradientCreatorView.endColor = gradientColors![1]
 		
 		mainImageView.backgroundColor = UIColor.clearColor()
 		mainImageView.setBackgroundColorRed(1.0, green: 1.0, blue: 1.0, alpha: 0.0)
 		
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateGradient", name: "GradientCreatorChanged", object: nil)
 		
-		
-		updateGradient()
+		delay(0.1) {
+			self.updateGradient()
+		}
 	}
 	
 	deinit {
@@ -64,6 +73,43 @@ class CustomizeViewController: UIViewController {
 	}
 	
 	
+// MARK: Colors
+	
+	@IBAction func editSwatch(tap: UITapGestureRecognizer) {
+		self.swatchEditing = (tap.view! as SwatchThumbnail)
+		self.colorPickerView.color = self.swatchEditing!.swatchView.backgroundColor!
+		
+		var cameraButton = UIBarButtonItem(image: UIImage(named: "icon_camera"), style: .Plain, target: self, action: "cameraAction")
+		cameraButton.tintColor = UIColor.lightGrayColor()
+		self.parentViewController!.navigationItem.rightBarButtonItem = cameraButton
+		
+		_colorPickerViewHidingTopConstraint.priority = 700
+		UIView.animateWithDuration(0.7, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: nil, animations: {
+			self.view.layoutIfNeeded()
+			}, completion: { finished in
+				
+		})
+	}
+	
+	@IBAction func chooseColorAction() {
+		if self.swatchEditing == self.gradientCreatorView.startSwatchThumbnail {
+			self.gradientCreatorView.startColor = self.colorPickerView.color
+		} else {
+			self.gradientCreatorView.endColor = self.colorPickerView.color
+		}
+		
+		var shareButton = UIBarButtonItem(image: UIImage(named: "icon_share"), style: .Plain, target: self, action: "shareAction")
+		self.parentViewController!.navigationItem.rightBarButtonItem = shareButton
+		
+		_colorPickerViewHidingTopConstraint.priority = 900
+		UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: nil, animations: {
+			self.view.layoutIfNeeded()
+			}, completion: { finished in
+				
+		})
+	}
+	
+	
 // MARK: Images
 	
 	@IBAction func didChangeChairFinish() {
@@ -72,7 +118,7 @@ class CustomizeViewController: UIViewController {
 	}
 	
 	func updateGradient() {
-		if self.gradientCreatorView.colors != gradientColors || self.gradientCreatorView.offsets != gradientOffsets {
+		if self.gradientCreatorView.colors != gradientColors! || self.gradientCreatorView.offsets != gradientOffsets {
 			gradientColors = self.gradientCreatorView.colors
 			gradientOffsets = self.gradientCreatorView.offsets
 			
@@ -80,7 +126,7 @@ class CustomizeViewController: UIViewController {
 			UIGraphicsBeginImageContextWithOptions(mainImageView.bounds.size, false, 0.0)
 			let context = UIGraphicsGetCurrentContext()
 			let locations = [CGFloat(gradientOffsets[0]),CGFloat(gradientOffsets[1])]
-			let colors = [gradientColors[0].CGColor!,gradientColors[1].CGColor!]
+			let colors = [gradientColors![0].CGColor!,gradientColors![1].CGColor!]
 			let colorspace = CGColorSpaceCreateDeviceRGB()
 			let gradient = CGGradientCreateWithColors(colorspace, colors, locations)
 			let startPoint = CGPointMake(0, 0)
@@ -89,10 +135,9 @@ class CustomizeViewController: UIViewController {
 			let gradientImage = UIGraphicsGetImageFromCurrentImageContext()
 			UIGraphicsEndImageContext();
 			
-			//shadowsImageView.image = gradientImage
 			
 			gpuGradient = GPUImagePicture(image: gradientImage)
-			var finish = ( self.chairFinishToggle.selectedSegmentIndex == 0 ? "gloss" : "matte")
+			let finish = ( self.chairFinishToggle.selectedSegmentIndex == 0 ? "gloss" : "matte")
 			gpuChair = GPUImagePicture(image: UIImage(named: "chair_custom_\(finish)"))
 			gpuChairMask = GPUImagePicture(image: UIImage(named: "chair_custom_mask"))
 			
@@ -107,9 +152,6 @@ class CustomizeViewController: UIViewController {
 			
 			maskFilter.addTarget(self.mainImageView)
 			
-			//gpuGradient!.addTarget(blendFilter)
-			
-			//blendFilter.addTarget(self.mainImageView)
 			
 			gpuChair!.processImage()
 			gpuGradient!.processImage()

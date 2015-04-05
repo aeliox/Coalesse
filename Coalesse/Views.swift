@@ -99,3 +99,163 @@ class GradientCreatorView:UIView {
 		NSNotificationCenter.defaultCenter().postNotificationName("GradientCreatorChanged", object: nil)
 	}
 }
+
+
+class ColorPickerView:UIView {
+	@IBOutlet weak var hueWheelView: HueWheelView!
+	@IBOutlet weak var hueCrosshairsView: UIView!
+	@IBOutlet weak var saturationPickerView: SaturationPickerView!
+	@IBOutlet weak var brightnessPickerView: BrightnessPickerView!
+	@IBOutlet weak var chooseButton: UIButton!
+	
+	var hue: Float = 0.0 {
+		didSet {
+			chooseButton.backgroundColor = self.color
+			
+			self.saturationPickerView.update(self.hue)
+			self.brightnessPickerView.update(self.hue, saturation: self.saturation)
+		}
+	}
+	
+	var saturation: Float = 1.0 {
+		didSet {
+			chooseButton.backgroundColor = self.color
+			
+			self.brightnessPickerView.update(self.hue, saturation: self.saturation)
+		}
+	}
+	
+	var brightness: Float = 1.0 {
+		didSet {
+			chooseButton.backgroundColor = self.color
+		}
+	}
+	
+	var color: UIColor {
+		get {
+			return UIColor(hue: CGFloat(self.hue), saturation: CGFloat(self.saturation), brightness: CGFloat(self.brightness), alpha: 1.0)
+		}
+		set(newValue) {
+			var _hue: CGFloat = 0.0
+			var _saturation: CGFloat = 0.0
+			var _brightness: CGFloat = 0.0
+			var _alpha: CGFloat = 0.0
+			
+			newValue.getHue(&_hue, saturation: &_saturation, brightness: &_brightness, alpha: &_alpha)
+			
+			self.hue = Float(_hue)
+			self.saturation = Float(_saturation)
+			self.brightness = Float(_brightness)
+			
+			updatePickerDisplays(true)
+		}
+	}
+	
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
+		chooseButton.layer.cornerRadius = 6.0
+		chooseButton.clipsToBounds = true
+	}
+	
+	func updatePickerDisplays(crosshairs: Bool) {
+		self.saturationPickerView.update(self.hue)
+		self.brightnessPickerView.update(self.hue, saturation: self.saturation)
+		
+		if crosshairs {
+			var degrees = (CGFloat(self.hue) * 360.0) - 90.0
+			var radians = degrees / 180.0 * CGFloat(M_PI)
+		
+			self.hueCrosshairsView.transform = CGAffineTransformMakeRotation(radians)
+			
+			
+			var saturationAdjustedWidth = self.saturationPickerView.bounds.size.width - self.saturationPickerView.crosshairsImageView.bounds.size.width
+			self.saturationPickerView._crosshairsImageViewLeadingConstraint.constant = CGFloat(self.saturation) * saturationAdjustedWidth
+			
+			
+			var brightnessAdjustedWidth = self.brightnessPickerView.bounds.size.width - self.brightnessPickerView.crosshairsImageView.bounds.size.width
+			self.brightnessPickerView._crosshairsImageViewLeadingConstraint.constant = CGFloat(self.brightness) * brightnessAdjustedWidth
+		}
+	}
+	
+	
+	@IBAction func didPanHueWheel(gesture: UIGestureRecognizer) {
+		let touch = gesture.locationInView(self.hueWheelView)
+		
+		var dx = touch.x - self.hueWheelView.bounds.size.width / 2.0
+		var dy = touch.y - self.hueWheelView.bounds.size.height / 2.0
+		
+		let angle = atan2(dy,dx)
+		let degrees = angle * (180.0 / CGFloat(M_PI))
+		
+		var _hue = Float(degrees) + 90.0
+		if _hue < 0 {
+			_hue = 360.0 + _hue
+		}
+		self.hue = _hue / 360.0
+		
+		self.hueCrosshairsView.transform = CGAffineTransformMakeRotation(angle);
+	}
+	
+	
+	@IBAction func didPanColorValue(gesture: UIGestureRecognizer) {
+		let colorView = gesture.view! as ColorValuePickerView
+		let touch = gesture.locationInView(colorView)
+		
+		colorView._crosshairsImageViewLeadingConstraint.constant = touch.x - (colorView.crosshairsImageView.bounds.size.width / 2.0)
+		
+		var adjustedWidth = colorView.bounds.size.width - colorView.crosshairsImageView.bounds.size.width
+		var value = min(adjustedWidth,max(0,colorView._crosshairsImageViewLeadingConstraint.constant))
+		value = value / adjustedWidth
+		
+		if colorView == self.saturationPickerView {
+			self.saturation = Float(value)
+		} else if colorView == self.brightnessPickerView {
+			self.brightness = Float(value)
+		}
+	}
+	
+}
+
+class HueWheelView:UIView {
+	
+	override func awakeFromNib() {
+		self.layer.cornerRadius = self.bounds.size.width / 2.0
+		self.clipsToBounds = true
+		
+		self.backgroundColor = UIColor.clearColor()
+	}
+}
+
+
+class ColorValuePickerView: UIView {
+	@IBOutlet weak var crosshairsImageView: UIImageView!
+	@IBOutlet weak var _crosshairsImageViewLeadingConstraint: NSLayoutConstraint!
+	
+	var gradiantLayer: CAGradientLayer = CAGradientLayer()
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
+		gradiantLayer.bounds = self.bounds
+		gradiantLayer.anchorPoint = CGPointZero
+		gradiantLayer.startPoint = CGPointMake(0.0, 0.5);
+		gradiantLayer.endPoint = CGPointMake(1.0, 0.5);
+		
+		self.layer.insertSublayer(gradiantLayer, atIndex: 0)
+	}
+}
+
+class SaturationPickerView: ColorValuePickerView {
+	func update(hue: Float) {
+		self.gradiantLayer.colors = [UIColor(hue: CGFloat(hue), saturation: 0.0, brightness: 1.0, alpha: 1.0).CGColor,UIColor(hue: CGFloat(hue), saturation: 1.0, brightness: 1.0, alpha: 1.0).CGColor]
+	}
+}
+
+class BrightnessPickerView: ColorValuePickerView {
+	func update(hue: Float, saturation: Float) {
+		self.gradiantLayer.colors = [UIColor(hue: CGFloat(hue), saturation: CGFloat(saturation), brightness: 0.0, alpha: 1.0).CGColor,UIColor(hue: CGFloat(hue), saturation: CGFloat(saturation), brightness: 1.0, alpha: 1.0).CGColor]
+	}
+}
+

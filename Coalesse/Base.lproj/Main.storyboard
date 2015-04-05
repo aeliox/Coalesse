@@ -450,6 +450,7 @@
                                                 <connections>
                                                     <outlet property="swatchView" destination="zpH-f9-AER" id="qIw-S4-IgM"/>
                                                     <outletCollection property="gestureRecognizers" destination="HJ9-br-SBq" appends="YES" id="LWe-0t-T3R"/>
+                                                    <outletCollection property="gestureRecognizers" destination="E4B-B8-5Mr" appends="YES" id="rCH-rA-VhY"/>
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1l3-IY-q7Q" userLabel="end swatch" customClass="SwatchThumbnail" customModule="Coalesse" customModuleProvider="target">
@@ -475,6 +476,7 @@
                                                 <connections>
                                                     <outlet property="swatchView" destination="QBD-Yy-Lax" id="8cy-p7-UMd"/>
                                                     <outletCollection property="gestureRecognizers" destination="5Ib-iK-EKg" appends="YES" id="oZa-3z-URc"/>
+                                                    <outletCollection property="gestureRecognizers" destination="xno-ce-8Rb" appends="YES" id="pzo-W5-9HM"/>
                                                 </connections>
                                             </view>
                                         </subviews>
@@ -514,21 +516,197 @@
                                     <outlet property="trackView" destination="Iar-EL-IKZ" id="98i-sT-1MY"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="goN-g1-2UN" userLabel="colorPickerView" customClass="ColorPickerView" customModule="Coalesse" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="600" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Wl-Wx-1PW" customClass="HueWheelView" customModule="Coalesse" customModuleProvider="target">
+                                        <rect key="frame" x="160" y="30" width="280" height="280"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="color_hue_wheel" translatesAutoresizingMaskIntoConstraints="NO" id="jpC-1y-fhe">
+                                                <rect key="frame" x="0.0" y="0.0" width="280" height="280"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="280" id="TV8-Vq-SW6"/>
+                                            <constraint firstAttribute="width" constant="280" id="WhD-6Q-KrO"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="bpp-Ky-F7y" appends="YES" id="HfF-hR-ybm"/>
+                                            <outletCollection property="gestureRecognizers" destination="Qpy-ej-XLm" appends="YES" id="3UW-DV-hot"/>
+                                        </connections>
+                                    </view>
+                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4k-I2-9WU" userLabel="view" customClass="HueWheelView" customModule="Coalesse" customModuleProvider="target">
+                                        <rect key="frame" x="160" y="30" width="280" height="280"/>
+                                        <subviews>
+                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4N-DN-xaa">
+                                                <rect key="frame" x="244" y="124" width="32" height="32"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="color_crosshairs" translatesAutoresizingMaskIntoConstraints="NO" id="raQ-0f-g4V">
+                                                        <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="raQ-0f-g4V" firstAttribute="leading" secondItem="f4N-DN-xaa" secondAttribute="leading" id="6iN-ME-B5t"/>
+                                                    <constraint firstItem="raQ-0f-g4V" firstAttribute="top" secondItem="f4N-DN-xaa" secondAttribute="top" id="EDg-IB-C7U"/>
+                                                    <constraint firstAttribute="height" constant="32" id="Phf-rS-Hqr"/>
+                                                    <constraint firstAttribute="width" constant="32" id="WAk-fD-PJS"/>
+                                                    <constraint firstAttribute="bottom" secondItem="raQ-0f-g4V" secondAttribute="bottom" id="cNm-iT-bY7"/>
+                                                    <constraint firstAttribute="trailing" secondItem="raQ-0f-g4V" secondAttribute="trailing" id="t3w-w3-R2P"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="280" id="CzT-52-10x"/>
+                                            <constraint firstAttribute="centerY" secondItem="f4N-DN-xaa" secondAttribute="centerY" id="Iam-9B-2yy"/>
+                                            <constraint firstAttribute="width" constant="280" id="OUi-iA-k7E"/>
+                                            <constraint firstAttribute="centerX" secondItem="f4N-DN-xaa" secondAttribute="centerX" id="egZ-87-KlW"/>
+                                            <constraint firstItem="f4N-DN-xaa" firstAttribute="top" secondItem="Z4k-I2-9WU" secondAttribute="top" constant="4" id="hw7-6D-Heq"/>
+                                            <constraint firstAttribute="trailing" secondItem="f4N-DN-xaa" secondAttribute="trailing" constant="4" id="lHq-rb-mXJ"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="egZ-87-KlW"/>
+                                                <exclude reference="hw7-6D-Heq"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDf-kt-mC9">
+                                        <rect key="frame" x="20" y="536" width="560" height="44"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="lCz-DX-hhJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
+                                        <size key="titleShadowOffset" width="0.0" height="1"/>
+                                        <state key="normal" title="Choose Color">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="chooseColorAction" destination="iIn-kn-rig" eventType="touchUpInside" id="nmZ-fx-3fY"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RiH-rv-IkK" customClass="SaturationPickerView" customModule="Coalesse" customModuleProvider="target">
+                                        <rect key="frame" x="160" y="335" width="280" height="64"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="color_crosshairs" translatesAutoresizingMaskIntoConstraints="NO" id="QQM-6i-lmc">
+                                                <rect key="frame" x="248" y="16" width="32" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="32" id="5Gh-p6-ax4"/>
+                                                    <constraint firstAttribute="height" constant="32" id="Xu2-YM-ioG"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="centerY" secondItem="QQM-6i-lmc" secondAttribute="centerY" id="XtS-GQ-UEx"/>
+                                            <constraint firstItem="QQM-6i-lmc" firstAttribute="leading" secondItem="RiH-rv-IkK" secondAttribute="leading" priority="800" constant="248" id="ZUh-be-gIX"/>
+                                            <constraint firstAttribute="height" constant="64" id="hT4-iv-Ar5"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QQM-6i-lmc" secondAttribute="trailing" id="re4-SH-jkm"/>
+                                            <constraint firstItem="QQM-6i-lmc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RiH-rv-IkK" secondAttribute="leading" id="vRY-Zp-37q"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="_crosshairsImageViewLeadingConstraint" destination="ZUh-be-gIX" id="iX7-Su-x9O"/>
+                                            <outlet property="crosshairsImageView" destination="QQM-6i-lmc" id="xrm-DL-sCG"/>
+                                            <outletCollection property="gestureRecognizers" destination="HzN-W4-b8a" appends="YES" id="gnQ-u8-Uqf"/>
+                                            <outletCollection property="gestureRecognizers" destination="UCc-aN-vjD" appends="YES" id="uVz-aA-lpq"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KDt-ld-SVz" customClass="BrightnessPickerView" customModule="Coalesse" customModuleProvider="target">
+                                        <rect key="frame" x="160" y="424" width="280" height="64"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="color_crosshairs" translatesAutoresizingMaskIntoConstraints="NO" id="wEh-AI-Azp">
+                                                <rect key="frame" x="248" y="16" width="32" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="eNL-aj-qT3"/>
+                                                    <constraint firstAttribute="width" constant="32" id="nGe-tb-Lfe"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstItem="wEh-AI-Azp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KDt-ld-SVz" secondAttribute="leading" id="4M9-cb-rgi"/>
+                                            <constraint firstAttribute="height" constant="64" id="9AM-wz-uba"/>
+                                            <constraint firstItem="wEh-AI-Azp" firstAttribute="leading" secondItem="KDt-ld-SVz" secondAttribute="leading" priority="800" constant="248" id="DAy-FZ-3TQ"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wEh-AI-Azp" secondAttribute="trailing" id="KP4-P8-3Zl"/>
+                                            <constraint firstAttribute="centerY" secondItem="wEh-AI-Azp" secondAttribute="centerY" id="vjy-pK-5Ee"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="_crosshairsImageViewLeadingConstraint" destination="DAy-FZ-3TQ" id="Rbl-s7-NbT"/>
+                                            <outlet property="crosshairsImageView" destination="wEh-AI-Azp" id="v1F-PI-hUZ"/>
+                                            <outletCollection property="gestureRecognizers" destination="dsV-dO-kNB" appends="YES" id="qTw-JV-l66"/>
+                                            <outletCollection property="gestureRecognizers" destination="tU4-4K-duR" appends="YES" id="U2k-mm-8wL"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="uDf-kt-mC9" firstAttribute="leading" secondItem="goN-g1-2UN" secondAttribute="leading" constant="20" id="2tj-eI-nRu"/>
+                                    <constraint firstItem="Z4k-I2-9WU" firstAttribute="top" secondItem="5Wl-Wx-1PW" secondAttribute="top" id="3lz-mD-R8q"/>
+                                    <constraint firstItem="RiH-rv-IkK" firstAttribute="top" secondItem="5Wl-Wx-1PW" secondAttribute="bottom" constant="25" id="B4K-XN-SDH"/>
+                                    <constraint firstItem="RiH-rv-IkK" firstAttribute="trailing" secondItem="5Wl-Wx-1PW" secondAttribute="trailing" id="Geg-TJ-ByE"/>
+                                    <constraint firstItem="RiH-rv-IkK" firstAttribute="height" secondItem="KDt-ld-SVz" secondAttribute="height" id="K6w-Ie-3Lv"/>
+                                    <constraint firstItem="RiH-rv-IkK" firstAttribute="trailing" secondItem="KDt-ld-SVz" secondAttribute="trailing" id="Vt1-mg-Inr"/>
+                                    <constraint firstItem="5Wl-Wx-1PW" firstAttribute="top" secondItem="goN-g1-2UN" secondAttribute="top" constant="30" id="ZtS-fW-2On"/>
+                                    <constraint firstAttribute="centerX" secondItem="Z4k-I2-9WU" secondAttribute="centerX" id="aMW-Jd-bVL"/>
+                                    <constraint firstItem="RiH-rv-IkK" firstAttribute="leading" secondItem="KDt-ld-SVz" secondAttribute="leading" id="abv-JB-koW"/>
+                                    <constraint firstItem="KDt-ld-SVz" firstAttribute="top" secondItem="RiH-rv-IkK" secondAttribute="bottom" constant="25" id="eot-rl-iXp"/>
+                                    <constraint firstAttribute="trailing" secondItem="uDf-kt-mC9" secondAttribute="trailing" constant="20" id="gpq-wP-9tt"/>
+                                    <constraint firstAttribute="bottom" secondItem="uDf-kt-mC9" secondAttribute="bottom" constant="20" id="q8v-zm-ZPc"/>
+                                    <constraint firstItem="RiH-rv-IkK" firstAttribute="leading" secondItem="5Wl-Wx-1PW" secondAttribute="leading" id="td8-as-Wqt"/>
+                                    <constraint firstItem="Z4k-I2-9WU" firstAttribute="top" secondItem="goN-g1-2UN" secondAttribute="top" constant="40" id="vOi-s7-6mZ"/>
+                                    <constraint firstAttribute="centerX" secondItem="5Wl-Wx-1PW" secondAttribute="centerX" id="zjs-HT-IJu"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="vOi-s7-6mZ"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <outlet property="brightnessPickerView" destination="KDt-ld-SVz" id="57P-ir-kRa"/>
+                                    <outlet property="chooseButton" destination="uDf-kt-mC9" id="wRM-Y7-sAl"/>
+                                    <outlet property="hueCrosshairsView" destination="Z4k-I2-9WU" id="cPw-YN-75Y"/>
+                                    <outlet property="hueWheelView" destination="5Wl-Wx-1PW" id="b79-Cv-CyR"/>
+                                    <outlet property="saturationPickerView" destination="RiH-rv-IkK" id="wjB-IT-lrA"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="height" secondItem="goN-g1-2UN" secondAttribute="height" id="0bQ-tN-AM2"/>
                             <constraint firstItem="Qah-Ob-jT0" firstAttribute="top" secondItem="iRQ-1i-M4u" secondAttribute="top" id="1fL-OR-g4E"/>
+                            <constraint firstAttribute="trailing" secondItem="goN-g1-2UN" secondAttribute="trailing" id="6Qg-kd-lfR"/>
                             <constraint firstItem="c1f-kz-kf9" firstAttribute="top" secondItem="3dX-dE-sVC" secondAttribute="bottom" id="7a8-hH-h8h"/>
+                            <constraint firstItem="goN-g1-2UN" firstAttribute="top" secondItem="nCJ-Sj-643" secondAttribute="bottom" priority="800" id="AMt-1W-KGN"/>
                             <constraint firstItem="3dX-dE-sVC" firstAttribute="leading" secondItem="iRQ-1i-M4u" secondAttribute="leading" id="BJq-aL-pcN"/>
                             <constraint firstAttribute="trailing" secondItem="3dX-dE-sVC" secondAttribute="trailing" id="Emo-h0-NhB"/>
                             <constraint firstItem="3dX-dE-sVC" firstAttribute="top" secondItem="Qah-Ob-jT0" secondAttribute="bottom" id="L1p-Rn-Zuy"/>
+                            <constraint firstItem="goN-g1-2UN" firstAttribute="top" secondItem="iRQ-1i-M4u" secondAttribute="top" priority="800" id="PYI-4X-Ou7"/>
                             <constraint firstAttribute="trailing" secondItem="Qah-Ob-jT0" secondAttribute="trailing" id="X4A-JL-ud2"/>
+                            <constraint firstItem="goN-g1-2UN" firstAttribute="top" secondItem="3dX-dE-sVC" secondAttribute="bottom" priority="900" id="f10-lC-Gix"/>
+                            <constraint firstItem="c1f-kz-kf9" firstAttribute="top" secondItem="goN-g1-2UN" secondAttribute="bottom" id="kzf-1Q-otO"/>
+                            <constraint firstItem="goN-g1-2UN" firstAttribute="leading" secondItem="iRQ-1i-M4u" secondAttribute="leading" id="yf9-RN-hNB"/>
                             <constraint firstItem="Qah-Ob-jT0" firstAttribute="leading" secondItem="iRQ-1i-M4u" secondAttribute="leading" id="zSF-GI-46j"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="kzf-1Q-otO"/>
+                                <exclude reference="PYI-4X-Ou7"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="_colorPickerViewHidingTopConstraint" destination="f10-lC-Gix" id="S3K-fk-LNk"/>
                         <outlet property="chairFinishToggle" destination="1mJ-9C-aJU" id="qVq-H4-sZK"/>
+                        <outlet property="colorPickerView" destination="goN-g1-2UN" id="uO9-37-pM0"/>
                         <outlet property="gradientCreatorView" destination="3dX-dE-sVC" id="PxC-zc-K9f"/>
                         <outlet property="mainImageView" destination="d6q-C2-1Re" id="xZc-jw-0sz"/>
                         <outlet property="shadowsImageView" destination="85E-1K-hY4" id="7Yv-xV-Gag"/>
@@ -545,6 +723,46 @@
                         <action selector="didPanTrackView:" destination="3dX-dE-sVC" id="yzf-Lc-Pgh"/>
                     </connections>
                 </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="bpp-Ky-F7y">
+                    <connections>
+                        <action selector="didPanHueWheel:" destination="goN-g1-2UN" id="rcY-dZ-LqY"/>
+                    </connections>
+                </panGestureRecognizer>
+                <tapGestureRecognizer id="Qpy-ej-XLm">
+                    <connections>
+                        <action selector="didPanHueWheel:" destination="goN-g1-2UN" id="i5b-xO-Bpa"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="E4B-B8-5Mr">
+                    <connections>
+                        <action selector="editSwatch:" destination="iIn-kn-rig" id="AwO-rX-wxr"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="xno-ce-8Rb">
+                    <connections>
+                        <action selector="editSwatch:" destination="iIn-kn-rig" id="8Mx-lP-T6D"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="HzN-W4-b8a">
+                    <connections>
+                        <action selector="didPanColorValue:" destination="goN-g1-2UN" id="hXj-1G-Ra0"/>
+                    </connections>
+                </panGestureRecognizer>
+                <tapGestureRecognizer id="UCc-aN-vjD">
+                    <connections>
+                        <action selector="didPanColorValue:" destination="goN-g1-2UN" id="tWP-OK-USD"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="dsV-dO-kNB">
+                    <connections>
+                        <action selector="didPanColorValue:" destination="goN-g1-2UN" id="MJQ-sm-7C9"/>
+                    </connections>
+                </panGestureRecognizer>
+                <tapGestureRecognizer id="tU4-4K-duR">
+                    <connections>
+                        <action selector="didPanColorValue:" destination="goN-g1-2UN" id="oSk-ZN-SMe"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1458" y="1006"/>
         </scene>
@@ -1160,6 +1378,8 @@ For more information please visit our websites:
     <resources>
         <image name="chair_custom_shadows" width="1250" height="1153"/>
         <image name="chair_standard_neutral_1" width="1250" height="1153"/>
+        <image name="color_crosshairs" width="32" height="32"/>
+        <image name="color_hue_wheel" width="280" height="280"/>
         <image name="color_wheel" width="50" height="50"/>
         <image name="default_chair" width="209" height="223"/>
         <image name="default_customize" width="157" height="56"/>

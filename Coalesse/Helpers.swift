@@ -54,6 +54,16 @@ func cancel_delay(closure:dispatch_cancelable_closure?) {
 	}
 }
 
+
+func CGPointAngle(a: CGPoint, b: CGPoint) -> CGFloat {
+	return atan2(a.y - b.y, a.x - b.x);
+}
+
+func CGPointDistance(a: CGPoint, b: CGPoint) -> CGFloat {
+	return sqrt(pow((a.x - b.x), 2) + pow((a.y - b.y), 2));
+}
+
+
 extension UIColor {
 
 	class func random() -> UIColor {
