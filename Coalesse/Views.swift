@@ -81,6 +81,10 @@ class GradientCreatorView:UIView {
 				min(1.0,max(0.0,(Float(self._endSwatchThumbnailLeadingConstraint.constant) / (Float(self.trackView.bounds.size.width) - Float(self.endSwatchThumbnail.bounds.size.width)))))
 			]
 		}
+		set(newValue) {
+			_startSwatchThumbnailLeadingConstraint.constant = CGFloat(newValue[0]) * (CGFloat(self.trackView.bounds.size.width) - CGFloat(self.startSwatchThumbnail.bounds.size.width))
+			_endSwatchThumbnailLeadingConstraint.constant = CGFloat(newValue[1]) * (CGFloat(self.trackView.bounds.size.width) - CGFloat(self.endSwatchThumbnail.bounds.size.width))
+		}
 	}
 	
 	override func awakeFromNib() {
@@ -248,6 +252,14 @@ class ColorValuePickerView: UIView {
 }
 
 class SaturationPickerView: ColorValuePickerView {
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
+		self.crosshairsImageView.image = self.crosshairsImageView.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+		self.crosshairsImageView.tintColor = UIColor.blackColor()
+	}
+	
 	func update(hue: Float) {
 		self.gradiantLayer.colors = [UIColor(hue: CGFloat(hue), saturation: 0.0, brightness: 1.0, alpha: 1.0).CGColor,UIColor(hue: CGFloat(hue), saturation: 1.0, brightness: 1.0, alpha: 1.0).CGColor]
 	}

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import GPUImage
+import Realm
 
 class CustomizeViewController: UIViewController {
 	@IBOutlet weak var shadowsImageView: UIImageView!
@@ -29,11 +30,18 @@ class CustomizeViewController: UIViewController {
 	var gpuChairMask: GPUImagePicture?
 	
 	
+	var design: Design?
+	
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if gradientColors == nil {
+		if self.design == nil {
 			gradientColors = [UIColor.random(),UIColor.random()]
+		} else {
+			gradientColors = self.design!.colors()
+			gradientOffsets = self.design!.locations()
+			chairFinishToggle.selectedSegmentIndex = self.design!.finish
 		}
 		
 		gradientCreatorView.startColor = gradientColors![0]
@@ -45,6 +53,11 @@ class CustomizeViewController: UIViewController {
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateGradient", name: "GradientCreatorChanged", object: nil)
 		
 		delay(0.1) {
+			if self.design != nil {
+				self.gradientCreatorView.offsets = self.gradientOffsets
+				self.gradientOffsets = []
+			}
+			
 			self.updateGradient()
 		}
 	}
@@ -64,6 +77,11 @@ class CustomizeViewController: UIViewController {
 			logoImageView.contentMode = .ScaleAspectFit
 			
 			self.parentViewController!.navigationItem.titleView = logoImageView
+			
+			
+			var shareButton = UIBarButtonItem(image: UIImage(named: "icon_share"), style: .Plain, target: self, action: "shareAction")
+			shareButton.tintColor = UIColor.lightGrayColor()
+			self.parentViewController!.navigationItem.rightBarButtonItem = shareButton
 		}
 	}
 	
@@ -99,6 +117,7 @@ class CustomizeViewController: UIViewController {
 		}
 		
 		var shareButton = UIBarButtonItem(image: UIImage(named: "icon_share"), style: .Plain, target: self, action: "shareAction")
+		shareButton.tintColor = UIColor.lightGrayColor()
 		self.parentViewController!.navigationItem.rightBarButtonItem = shareButton
 		
 		_colorPickerViewHidingTopConstraint.priority = 900
@@ -107,6 +126,31 @@ class CustomizeViewController: UIViewController {
 			}, completion: { finished in
 				
 		})
+	}
+	
+	
+// MARK: Actions
+	
+	func shareAction() {
+		UIGraphicsBeginImageContextWithOptions(self.mainImageView.bounds.size, false, 0.0)
+		self.mainImageView.drawViewHierarchyInRect(self.mainImageView.bounds, afterScreenUpdates: false)
+		let image = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		
+		let text = "Custom Coalesse <5 Chair"
+		let website = NSURL(string: "http://www.coalesse.com/")!
+		let design = ["finish": self.chairFinishToggle.selectedSegmentIndex, "colors": self.gradientColors!, "locations": self.gradientOffsets]
+		
+		let saveDesignActivity = SaveDesign()
+		
+		let activityVC = UIActivityViewController(activityItems: [image,text,website,design], applicationActivities: [saveDesignActivity])
+		activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint]
+		
+		self.presentViewController(activityVC, animated: true, completion: nil)
+	}
+	
+	func cameraAction() {
+		
 	}
 	
 	
@@ -157,5 +201,50 @@ class CustomizeViewController: UIViewController {
 			gpuGradient!.processImage()
 			gpuChairMask!.processImage()
 		}
+	}
+}
+
+
+class SaveDesign: UIActivity {
+	var designImage: UIImage?
+	var designDict: [String:AnyObject]?
+	
+	override func activityType() -> String? {
+		return "com.coalesse.Coalesse.SaveDesign"
+	}
+	
+	override func activityTitle() -> String? {
+		return "Save Design"
+	}
+	
+	override func activityImage() -> UIImage? {
+		return UIImage(named: "icon_standard")
+	}
+	
+	override func canPerformWithActivityItems(activityItems: [AnyObject]) -> Bool {
+		return true
+	}
+	
+	override func prepareWithActivityItems(activityItems: [AnyObject]) {
+		for item in activityItems {
+			if let dict = item as? [String:AnyObject] {
+				self.designDict = dict
+			} else if let image = item as? UIImage {
+				self.designImage = image
+			}
+		}
+	}
+	
+	override func performActivity() {
+		let realm = RLMRealm.defaultRealm()
+		
+		realm.beginWriteTransaction()
+		var design = Design.createInDefaultRealmWithObject([
+			"finish": self.designDict!["finish"] as Int
+			])
+		design.setColors(self.designDict!["colors"] as [UIColor])
+		design.setLocations(self.designDict!["locations"] as [Float])
+		design.setImage(self.designImage!)
+		realm.commitWriteTransaction()
 	}
 }

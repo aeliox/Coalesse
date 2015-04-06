@@ -39,11 +39,23 @@ class MainViewController: UIViewController {
 // MARK: Nav
 	
 	func didSelectMenuNav(notification: NSNotification) {
+		openViewController(notification)
+	}
+	
+	func showSavedDesign(design: Design) {
+		let notification = NSNotification(name: "", object: "customize")
+		openViewController(notification, savedDesign: design)
+	}
+	
+	func openViewController(notification: NSNotification, savedDesign: Design? = nil) {
 		var newViewController: UIViewController?
 		
 		switch notification.object as String {
 		case "customize":
 			newViewController = self.storyboard!.instantiateViewControllerWithIdentifier("CustomizeVC") as? CustomizeViewController
+			if savedDesign != nil {
+				(newViewController as CustomizeViewController).design = savedDesign
+			}
 		case "standard":
 			newViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StandardVC") as? StandardViewController
 		case "saved":

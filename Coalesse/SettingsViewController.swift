@@ -20,6 +20,8 @@ class SettingsViewController: UITableViewController {
 		if self.parentViewController != nil {
 			self.parentViewController!.navigationItem.titleView = nil
 			self.parentViewController!.navigationItem.title = "Settings"
+			
+			self.parentViewController!.navigationItem.rightBarButtonItem = nil
 		}
 	}
 	

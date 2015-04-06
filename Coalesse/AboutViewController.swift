@@ -20,6 +20,8 @@ class AboutViewController: UIViewController, UITextViewDelegate {
 		if self.parentViewController != nil {
 			self.parentViewController!.navigationItem.titleView = nil
 			self.parentViewController!.navigationItem.title = "About"
+			
+			self.parentViewController!.navigationItem.rightBarButtonItem = nil
 		}
 	}
 	

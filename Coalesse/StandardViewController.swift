@@ -44,6 +44,8 @@ class StandardViewController: UIViewController {
 			logoImageView.contentMode = .ScaleAspectFit
 			
 			self.parentViewController!.navigationItem.titleView = logoImageView
+			
+			self.parentViewController!.navigationItem.rightBarButtonItem = nil
 		}
 	}
 	

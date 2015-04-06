@@ -766,6 +766,91 @@
             </objects>
             <point key="canvasLocation" x="1458" y="1006"/>
         </scene>
+        <!--Saved View Controller-->
+        <scene sceneID="AV7-ZV-CyC">
+            <objects>
+                <collectionViewController storyboardIdentifier="SavedVC" id="FJL-w0-Mf0" customClass="SavedViewController" customModule="Coalesse" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" id="Mcf-ai-UPB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.5" minimumInteritemSpacing="0.0" id="X9E-M2-LnK">
+                            <size key="itemSize" width="300" height="300"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="50" height="215"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SavedDesignCell" id="deT-hO-HAP" customClass="SavedDesignCell" customModule="Coalesse" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vFu-Kh-xUm">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="vFu-Kh-xUm" firstAttribute="top" secondItem="deT-hO-HAP" secondAttribute="top" id="Dc4-AA-qVx"/>
+                                    <constraint firstAttribute="bottom" secondItem="vFu-Kh-xUm" secondAttribute="bottom" id="qAy-Vg-crU"/>
+                                    <constraint firstAttribute="trailing" secondItem="vFu-Kh-xUm" secondAttribute="trailing" id="vOo-FP-ZBq"/>
+                                    <constraint firstItem="vFu-Kh-xUm" firstAttribute="leading" secondItem="deT-hO-HAP" secondAttribute="leading" id="wFJ-XS-5y1"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="vFu-Kh-xUm" id="5L2-0e-VV9"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EmptyFooter" id="mZ9-bQ-LhE">
+                            <rect key="frame" x="0.0" y="300" width="600" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Saved Designs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSP-Za-WUK">
+                                    <rect key="frame" x="230" y="98" width="141" height="19"/>
+                                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVa-o5-weP">
+                                    <rect key="frame" x="246" y="123" width="109" height="29"/>
+                                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="15"/>
+                                    <state key="normal" title="Create a Design">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="showCustomizer" destination="FJL-w0-Mf0" eventType="touchUpInside" id="Fuf-AC-YoB"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="centerX" secondItem="GSP-Za-WUK" secondAttribute="centerX" id="10L-f1-4tf"/>
+                                <constraint firstAttribute="centerY" secondItem="PVa-o5-weP" secondAttribute="centerY" constant="-30" id="BCp-mw-AIy"/>
+                                <constraint firstAttribute="centerY" secondItem="GSP-Za-WUK" secondAttribute="centerY" id="By4-n6-VTF"/>
+                                <constraint firstAttribute="centerX" secondItem="PVa-o5-weP" secondAttribute="centerX" id="D3g-pq-6b6"/>
+                            </constraints>
+                        </collectionReusableView>
+                        <connections>
+                            <outlet property="dataSource" destination="FJL-w0-Mf0" id="t2V-93-Ecn"/>
+                            <outlet property="delegate" destination="FJL-w0-Mf0" id="PsE-0l-h7w"/>
+                            <outletCollection property="gestureRecognizers" destination="aLl-eA-Xd9" appends="YES" id="0LR-sy-zfz"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vWO-2h-n1W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="aLl-eA-Xd9">
+                    <connections>
+                        <action selector="didLongPress:" destination="FJL-w0-Mf0" id="QRM-rZ-cev"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1453" y="1763"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="cjG-BI-vUs">
             <objects>
@@ -1355,24 +1440,6 @@ For more information please visit our websites:
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3mz-qq-kIh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2214" y="1763"/>
-        </scene>
-        <!--Saved View Controller-->
-        <scene sceneID="miM-30-ERF">
-            <objects>
-                <viewController storyboardIdentifier="SavedVC" id="TIb-sH-xmh" customClass="SavedViewController" customModule="Coalesse" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="YsH-bM-Odz"/>
-                        <viewControllerLayoutGuide type="bottom" id="AFx-Ex-O3y"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="L7L-lg-sc8">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="0.42326688218390807" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="T3c-I6-Vmw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1458" y="1764"/>
         </scene>
     </scenes>
     <resources>
