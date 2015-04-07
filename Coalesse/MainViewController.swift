@@ -23,7 +23,11 @@ class MainViewController: UIViewController {
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "didSelectMenuNav:", name: "DidSelectMenuNav", object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "showWebView:", name: "ShowWebView", object: nil)
 		
-		//self.transitioningDelegate = self.transitionManager
+		let logoImageView = UIImageView(image: UIImage(named: "header_logo"))
+		logoImageView.frame = CGRectMake(0,0,144,14)
+		logoImageView.contentMode = .ScaleAspectFit
+		
+		self.navigationItem.titleView = logoImageView
 	}
 	
 	deinit {

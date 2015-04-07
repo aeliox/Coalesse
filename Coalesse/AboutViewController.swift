@@ -10,8 +10,26 @@ import Foundation
 import UIKit
 
 class AboutViewController: UIViewController, UITextViewDelegate {
+	@IBOutlet weak var aboutTextView: UITextView!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		if self.view.bounds.size.height <= 568.0 {
+			var text = aboutTextView.attributedText.mutableCopy() as NSMutableAttributedString
+			text.beginEditing()
+			text.enumerateAttribute(NSFontAttributeName, inRange: NSMakeRange(0, text.length), options: nil, usingBlock: { (let value, let range, let stop) -> Void in
+				if value != nil {
+					let oldFont = value as UIFont;
+					let newFont = oldFont.fontWithSize((self.view.bounds.size.height <= 480.0 ? 11.0 : 13.0 ))
+					text.removeAttribute(NSFontAttributeName, range: range)
+					text.addAttribute(NSFontAttributeName, value: newFont, range: range)
+				}
+			})
+			text.endEditing()
+			
+			aboutTextView.attributedText = text
+		}
 	}
 	
 	override func willMoveToParentViewController(parent: UIViewController?) {

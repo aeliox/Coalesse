@@ -11,7 +11,7 @@ import UIKit
 import GPUImage
 import Realm
 
-class CustomizeViewController: UIViewController {
+class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 	@IBOutlet weak var shadowsImageView: UIImageView!
 	@IBOutlet weak var mainImageView: GPUImageView!
 	@IBOutlet weak var chairFinishToggle: UISegmentedControl!
@@ -32,9 +32,14 @@ class CustomizeViewController: UIViewController {
 	
 	var design: Design?
 	
+	let imagePicker = UIImagePickerController()
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		self.imagePicker.delegate = self
+		
 		
 		if self.design == nil {
 			gradientColors = [UIColor.random(),UIColor.random()]
@@ -124,7 +129,7 @@ class CustomizeViewController: UIViewController {
 		UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: nil, animations: {
 			self.view.layoutIfNeeded()
 			}, completion: { finished in
-				
+				self.colorPickerView.image = nil
 		})
 	}
 	
@@ -150,7 +155,59 @@ class CustomizeViewController: UIViewController {
 	}
 	
 	func cameraAction() {
+		let alertController = UIAlertController(title: "Color Match", message: "Match a color from a photo.", preferredStyle: .Alert)
 		
+		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+			
+		}
+		alertController.addAction(cancelAction)
+		
+		let photoAction = UIAlertAction(title: "Choose Photo", style: .Default) { (action) in
+			self.imagePicker.allowsEditing = false
+			self.imagePicker.sourceType = .PhotoLibrary
+			self.presentViewController(self.imagePicker, animated: true, completion: nil)
+		}
+		alertController.addAction(photoAction)
+		
+		if UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil {
+			let cameraAction = UIAlertAction(title: "Take a Photo", style: .Default) { (action) in
+				self.imagePicker.allowsEditing = false
+				self.imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+				self.imagePicker.cameraCaptureMode = .Photo
+				self.presentViewController(self.imagePicker, animated: true, completion: nil)
+			}
+			alertController.addAction(cameraAction)
+		}
+		
+		self.presentViewController(alertController, animated: true) {
+			
+		}
+	}
+	
+	func hueWheelAction() {
+		self.colorPickerView.image = nil
+		
+		var cameraButton = UIBarButtonItem(image: UIImage(named: "icon_camera"), style: .Plain, target: self, action: "cameraAction")
+		cameraButton.tintColor = UIColor.lightGrayColor()
+		self.parentViewController!.navigationItem.rightBarButtonItem = cameraButton
+	}
+	
+	
+	func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+		var image = info[UIImagePickerControllerOriginalImage] as UIImage
+		self.colorPickerView.image = image
+		
+		var hueWheelButton = UIButton(frame: CGRectMake(0,0,26,26))
+		hueWheelButton.setImage(UIImage(named: "icon_color_hue_wheel"), forState: .Normal)
+		hueWheelButton.addTarget(self, action: "hueWheelAction", forControlEvents: .TouchUpInside)
+		var hueWheelBarButton = UIBarButtonItem(customView: hueWheelButton)
+		self.parentViewController!.navigationItem.rightBarButtonItem = hueWheelBarButton
+		
+		self.dismissViewControllerAnimated(true, completion: nil)
+	}
+	
+	func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+		self.dismissViewControllerAnimated(true, completion: nil)
 	}
 	
 	

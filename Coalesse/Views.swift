@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import GPUImage
 
 class SwatchThumbnail:UIView {
 	@IBOutlet weak var swatchView: UIView!
@@ -107,10 +108,51 @@ class GradientCreatorView:UIView {
 
 class ColorPickerView:UIView {
 	@IBOutlet weak var hueWheelView: HueWheelView!
+	@IBOutlet weak var _hueWheelViewTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _hueWheelViewBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var hueCrosshairsView: UIView!
 	@IBOutlet weak var saturationPickerView: SaturationPickerView!
+	@IBOutlet weak var _saturationPickerViewBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var brightnessPickerView: BrightnessPickerView!
 	@IBOutlet weak var chooseButton: UIButton!
+	@IBOutlet weak var _chooseButtonBottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _chooseButtonCenterYHueWheelConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _chooseButtonCenterXHueWheelConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _chooseButtonHeightHueWheelConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _chooseButtonLeadingHueWheelConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _chooseButtonTrailingHueWheelConstraint: NSLayoutConstraint!
+	
+	@IBOutlet weak var imageMatchView: UIView!
+	@IBOutlet weak var imageMatchImageView: UIImageView!
+	@IBOutlet weak var imageMatchCrosshairsImageView: UIImageView!
+	@IBOutlet weak var _imageMatchCrosshairsImageViewTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _imageMatchCrosshairsImageViewLeadingConstraint: NSLayoutConstraint!
+	
+	var image: UIImage? = nil {
+		didSet {
+			self.imageMatchImageView.image = self.image
+			
+			if self.image == nil {
+				chooseButton.backgroundColor = self.color
+			}
+			
+			UIView.animateWithDuration(0.2, animations: {
+				if self.image != nil {
+					self.imageMatchView.alpha = 1.0
+				} else {
+					self.imageMatchView.alpha = 0.0
+				}
+			}, completion: {finished in
+				if self.image != nil {
+					self._imageMatchCrosshairsImageViewTopConstraint.constant = (self.imageMatchView.bounds.size.height / 2.0) - (self.imageMatchCrosshairsImageView.bounds.size.height / 2.0)
+					self._imageMatchCrosshairsImageViewLeadingConstraint.constant = (self.imageMatchView.bounds.size.width / 2.0) - (self.imageMatchCrosshairsImageView.bounds.size.width / 2.0)
+					
+					self.chooseButton.backgroundColor = self.imageMatchView.colorAtPoint(self.imageMatchView.center)
+				}
+			})
+		}
+	}
+	
 	
 	var hue: Float = 0.0 {
 		didSet {
@@ -137,7 +179,11 @@ class ColorPickerView:UIView {
 	
 	var color: UIColor {
 		get {
-			return UIColor(hue: CGFloat(self.hue), saturation: CGFloat(self.saturation), brightness: CGFloat(self.brightness), alpha: 1.0)
+			if self.image == nil {
+				return UIColor(hue: CGFloat(self.hue), saturation: CGFloat(self.saturation), brightness: CGFloat(self.brightness), alpha: 1.0)
+			} else {
+				return self.chooseButton.backgroundColor!
+			}
 		}
 		set(newValue) {
 			var _hue: CGFloat = 0.0
@@ -161,6 +207,30 @@ class ColorPickerView:UIView {
 		
 		chooseButton.layer.cornerRadius = 6.0
 		chooseButton.clipsToBounds = true
+		chooseButton.layer.borderColor = UIColor.lightGrayColor().CGColor
+		chooseButton.layer.borderWidth = 0.5
+		
+		
+		self.imageMatchCrosshairsImageView.image = self.imageMatchCrosshairsImageView.image!.imageWithRenderingMode(.AlwaysTemplate)
+		self.imageMatchCrosshairsImageView.tintColor = UIColor.yellowColor()
+		
+		
+		delay(0.1) {
+			if self.bounds.size.height <= 568.0 {
+				self._hueWheelViewTopConstraint.constant = 10.0
+				self._hueWheelViewBottomConstraint.constant = 20.0
+				self._saturationPickerViewBottomConstraint.constant = ( self.bounds.size.height <= 480.0 ? 10.0 : 20.0 )
+				self._chooseButtonBottomConstraint.constant = 10.0
+				
+				if self.bounds.size.height <= 480.0 {
+					self._chooseButtonCenterYHueWheelConstraint.priority = 900
+					self._chooseButtonCenterXHueWheelConstraint.priority = 900
+					self._chooseButtonHeightHueWheelConstraint.priority = 900
+					self._chooseButtonLeadingHueWheelConstraint.priority = 900
+					self._chooseButtonTrailingHueWheelConstraint.priority = 900
+				}
+			}
+		}
 	}
 	
 	func updatePickerDisplays(crosshairs: Bool) {
@@ -220,6 +290,15 @@ class ColorPickerView:UIView {
 		}
 	}
 	
+	
+	@IBAction func didPanImageMatchView(gesture: UIGestureRecognizer) {
+		let touch = gesture.locationInView(self.imageMatchView)
+		
+		self._imageMatchCrosshairsImageViewTopConstraint.constant = touch.y - (self.imageMatchCrosshairsImageView.bounds.size.height / 2.0)
+		self._imageMatchCrosshairsImageViewLeadingConstraint.constant = touch.x - (self.imageMatchCrosshairsImageView.bounds.size.width / 2.0)
+		
+		self.chooseButton.backgroundColor = self.imageMatchView.colorAtPoint(touch)
+	}
 }
 
 class HueWheelView:UIView {
