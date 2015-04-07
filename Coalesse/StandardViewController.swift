@@ -15,19 +15,23 @@ class StandardViewController: UIViewController {
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var swatchesView: UIView!
 	
-	var rotateIndex = 1
+	var rotateIndex = 0
 	var swatches: [[String:String]] = []
+	var swatchIndex = 0
+	
+	var currentPanAmount: Float = 0.0
+	var panThreshold: Float = 6.0
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		swatches = [
-			["title": "Neutral Light to Dark", "key": "neutral"],
-			["title": "Neutral Dark to Light", "key": "neutral-flipped"],
-			["title": "3k Woven Carbon Fiber", "key": "carbon"],
-			["title": "Denim Blue", "key": "denim"],
-			["title": "Metalllic Copper Paint", "key": "copper"],
-			["title": "Color Red to Pink", "key": "redtopink"]
+			["title": "Neutral Light to Dark", "key": "light-dark"],
+			["title": "Neutral Dark to Light", "key": "dark-light"],
+			["title": "3k Woven Carbon Fiber", "key": "3K_carbon_fiber"],
+			["title": "Denim Blue", "key": "carbon_fade"],
+			["title": "Metalllic Copper Paint", "key": "metallic-copper"],
+			["title": "Color Red to Pink", "key": "redpink_fade"]
 		]
 		
 		(self.swatchesView.viewWithTag(0)! as SwatchThumbnail).selected = true
@@ -57,6 +61,22 @@ class StandardViewController: UIViewController {
 	
 // MARK:
 	
+	func updateImage(animated: Bool = false) {
+		let swatchInfo = swatches[self.swatchIndex]
+		let key = swatchInfo["key"]
+		titleLabel.text = swatchInfo["title"]
+		
+		if animated {
+			UIView.transitionWithView(chairImageView, duration: 0.3, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+				self.chairImageView.image = UIImage(named: "\(key!)\(self.rotateIndex)")
+				}, completion: { finished in
+					
+			})
+		} else {
+			self.chairImageView.image = UIImage(named: "\(key!)\(self.rotateIndex)")
+		}
+	}
+	
 	@IBAction func changeSwatch(gesture: UITapGestureRecognizer) {
 		let swatch = gesture.view! as SwatchThumbnail
 		
@@ -67,15 +87,35 @@ class StandardViewController: UIViewController {
 		}
 		
 		swatch.selected = true
+		self.swatchIndex = swatch.tag
 		
-		let swatchInfo = swatches[swatch.tag]
-		let key = swatchInfo["key"]
-		titleLabel.text = swatchInfo["title"]
+		updateImage(animated: true)
+	}
+	
+	
+	@IBAction func didPan(pan: UIPanGestureRecognizer) {
+		let touch = pan.translationInView(pan.view!)
 		
-		UIView.transitionWithView(chairImageView, duration: 0.3, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-			self.chairImageView.image = UIImage(named: "chair_standard_\(key!)_\(self.rotateIndex)")
-			}, completion: { finished in
-				
-			})
+		currentPanAmount += Float(touch.x)
+		
+		if currentPanAmount < (-1.0 * panThreshold) {
+			rotateIndex += 3
+			if rotateIndex > 96 {
+				rotateIndex = 0
+			}
+			updateImage()
+			
+			currentPanAmount = 0.0
+		} else if currentPanAmount > panThreshold {
+			rotateIndex -= 3
+			if rotateIndex < 0 {
+				rotateIndex = 96
+			}
+			updateImage()
+			
+			currentPanAmount = 0.0
+		}
+		
+		pan.setTranslation(CGPointZero, inView: pan.view!)
 	}
 }
