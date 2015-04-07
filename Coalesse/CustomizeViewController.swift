@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import GPUImage
 import Realm
+import MessageUI
 
-class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate {
 	@IBOutlet weak var shadowsImageView: UIImageView!
 	@IBOutlet weak var mainImageView: GPUImageView!
 	@IBOutlet weak var chairFinishToggle: UISegmentedControl!
@@ -96,6 +97,11 @@ class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate
 	}
 	
 	
+	func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+		self.dismissViewControllerAnimated(true, completion: nil)
+	}
+	
+	
 // MARK: Colors
 	
 	@IBAction func editSwatch(tap: UITapGestureRecognizer) {
@@ -142,17 +148,57 @@ class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate
 		let image = UIGraphicsGetImageFromCurrentImageContext()
 		UIGraphicsEndImageContext()
 		
-		let text = "Custom Coalesse <5 Chair"
-		let website = NSURL(string: "http://www.coalesse.com/")!
-		let design = ["finish": self.chairFinishToggle.selectedSegmentIndex, "colors": self.gradientColors!, "locations": self.gradientOffsets]
 		
-		let saveDesignActivity = SaveDesign()
+		let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
 		
-		let activityVC = UIActivityViewController(activityItems: [image,text,website,design], applicationActivities: [saveDesignActivity])
-		activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint]
+		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+			
+		}
+		alertController.addAction(cancelAction)
 		
-		self.presentViewController(activityVC, animated: true, completion: nil)
+		let saveAction = UIAlertAction(title: "Save Design", style: .Default) { (action) in
+			let realm = RLMRealm.defaultRealm()
+			
+			realm.beginWriteTransaction()
+			var design = Design.createInDefaultRealmWithObject([
+				"finish": self.chairFinishToggle.selectedSegmentIndex
+			])
+			design.setColors(self.gradientColors!)
+			design.setLocations(self.gradientOffsets)
+			design.setImage(image)
+			realm.commitWriteTransaction()
+		}
+		alertController.addAction(saveAction)
+		
+		let quoteAction = UIAlertAction(title: "Get a Design Quote", style: .Default) { (action) in
+			var mailPicker = MFMailComposeViewController()
+			mailPicker.mailComposeDelegate = self
+			mailPicker.setToRecipients([coalesseEmail])
+			mailPicker.setSubject("<5 Custom Design Quote")
+			mailPicker.addAttachmentData(UIImageJPEGRepresentation(image, 0.8), mimeType: "image/jpeg", fileName: "design.jpg")
+			
+			self.presentViewController(mailPicker, animated: true, completion: nil)
+		}
+		alertController.addAction(quoteAction)
+		
+		let shareAction = UIAlertAction(title: "Share Design", style: .Default) { (action) in
+			let text = "Custom Coalesse <5 Chair"
+			let website = NSURL(string: "http://www.coalesse.com/")!
+			
+			let activityVC = UIActivityViewController(activityItems: [image,text,website], applicationActivities: nil)
+			activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact]
+			
+			self.presentViewController(activityVC, animated: true, completion: nil)
+		}
+		alertController.addAction(shareAction)
+		
+		self.presentViewController(alertController, animated: true) {
+			
+		}
 	}
+	
+	
+// MARK: Color Match
 	
 	func cameraAction() {
 		let alertController = UIAlertController(title: "Color Match", message: "Match a color from a photo.", preferredStyle: .Alert)

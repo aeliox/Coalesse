@@ -16,3 +16,5 @@ struct Colors {
 	let grayColor = UIColor(red: 212.0/255.0, green: 212.0/255.0, blue: 212.0/255.0, alpha: 1.0)
 	let offWhiteColor = UIColor(red: 247.0/255.0, green: 247.0/255.0, blue: 247.0/255.0, alpha: 1.0)
 }
+
+let coalesseEmail = "info@coalesse.com"
