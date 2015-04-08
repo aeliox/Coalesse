@@ -10,8 +10,12 @@ import Foundation
 import UIKit
 
 class SettingsViewController: UITableViewController {
+	@IBOutlet weak var pushNotificationsSwitch: UISwitch!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		self.pushNotificationsSwitch.setOn(UIApplication.sharedApplication().isRegisteredForRemoteNotifications(), animated: true)
 	}
 	
 	override func willMoveToParentViewController(parent: UIViewController?) {
@@ -28,6 +32,15 @@ class SettingsViewController: UITableViewController {
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
+	}
+	
+	
+	@IBAction func switchChanged() {
+		if self.pushNotificationsSwitch.on {
+			(UIApplication.sharedApplication().delegate as AppDelegate).registerForPushNotifications()
+		} else {
+			UIApplication.sharedApplication().unregisterForRemoteNotifications()
+		}
 	}
 	
 	

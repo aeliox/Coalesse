@@ -128,12 +128,36 @@ class ColorPickerView:UIView {
 	@IBOutlet weak var _imageMatchCrosshairsImageViewTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var _imageMatchCrosshairsImageViewLeadingConstraint: NSLayoutConstraint!
 	
+	var needsToRepositionChooseButton: Bool = false
+	
 	var image: UIImage? = nil {
 		didSet {
 			self.imageMatchImageView.image = self.image
 			
 			if self.image == nil {
 				chooseButton.backgroundColor = self.color
+				
+				if needsToRepositionChooseButton {
+					self._chooseButtonCenterYHueWheelConstraint.priority = 900
+					self._chooseButtonCenterXHueWheelConstraint.priority = 900
+					self._chooseButtonHeightHueWheelConstraint.priority = 900
+					self._chooseButtonLeadingHueWheelConstraint.priority = 900
+					self._chooseButtonTrailingHueWheelConstraint.priority = 900
+					
+					self.saturationPickerView.alpha = 1.0
+					self.brightnessPickerView.alpha = 1.0
+				}
+			} else {
+				if needsToRepositionChooseButton {
+					self._chooseButtonCenterYHueWheelConstraint.priority = 600
+					self._chooseButtonCenterXHueWheelConstraint.priority = 600
+					self._chooseButtonHeightHueWheelConstraint.priority = 600
+					self._chooseButtonLeadingHueWheelConstraint.priority = 600
+					self._chooseButtonTrailingHueWheelConstraint.priority = 600
+					
+					self.saturationPickerView.alpha = 0.0
+					self.brightnessPickerView.alpha = 0.0
+				}
 			}
 			
 			UIView.animateWithDuration(0.2, animations: {
@@ -223,6 +247,8 @@ class ColorPickerView:UIView {
 				self._chooseButtonBottomConstraint.constant = 10.0
 				
 				if self.bounds.size.height <= 480.0 {
+					self.needsToRepositionChooseButton = true
+					
 					self._chooseButtonCenterYHueWheelConstraint.priority = 900
 					self._chooseButtonCenterXHueWheelConstraint.priority = 900
 					self._chooseButtonHeightHueWheelConstraint.priority = 900

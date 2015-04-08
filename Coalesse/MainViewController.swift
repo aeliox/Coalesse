@@ -126,8 +126,47 @@ class MainViewController: UIViewController {
 
 
 class DefaultViewController: UIViewController {
+	@IBOutlet weak var chairImageView: UIImageView!
+	@IBOutlet weak var _chairImageViewTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _chairImageViewBottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _chairImageViewLeadingConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _chairImageViewWidthConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _chairImageViewHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var standardButton: UIButton!
+	@IBOutlet weak var _standardButtonCenterYConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _standardButtonWidthConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _standardButtonHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var customizeButton: UIButton!
+	@IBOutlet weak var _customizeButtonTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _customizeButtonWidthConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _customizeButtonHeightConstraint: NSLayoutConstraint!
+	
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+			self.view.removeConstraint(self._chairImageViewTopConstraint)
+			self.view.removeConstraint(self._chairImageViewBottomConstraint)
+			self.view.removeConstraint(self._chairImageViewLeadingConstraint)
+			
+			self._chairImageViewWidthConstraint.constant = 313.0
+			self._chairImageViewHeightConstraint.constant = 334.0
+			self.chairImageView.image = UIImage(named: "default_chair_ipad")
+			
+			self._standardButtonCenterYConstraint.constant = 80.0
+			self._standardButtonWidthConstraint.constant = 363.0
+			self._standardButtonHeightConstraint.constant = 85.0
+			self.standardButton.setImage(UIImage(named: "default_standardcolors_ipad"), forState: .Normal)
+			
+			self._customizeButtonTopConstraint.constant = 50.0
+			self._customizeButtonWidthConstraint.constant = 235.0
+			self._customizeButtonHeightConstraint.constant = 84.0
+			self.customizeButton.setImage(UIImage(named: "default_customize_ipad"), forState: .Normal)
+			
+			self.view.updateConstraints()
+			self.view.layoutIfNeeded()
+		}
 	}
 	
 	deinit {

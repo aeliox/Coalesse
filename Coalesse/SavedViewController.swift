@@ -101,11 +101,19 @@ class SavedViewController: UICollectionViewController, UIActionSheetDelegate {
 			let touch = gesture.locationInView(gesture.view!)
 			
 			if let indexPath = collectionView!.indexPathForItemAtPoint(touch) {
+				let cell = self.collectionView!.cellForItemAtIndexPath(indexPath)!
 				rowToDelete = indexPath.row
 				collectionView!.reloadData()
 				
 				
 				let alertController = UIAlertController(title: nil, message: "Do you want to delete this saved design?", preferredStyle: .ActionSheet)
+				if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+					alertController.modalPresentationStyle = .Popover
+					var popPresenter = alertController.popoverPresentationController!;
+					
+					popPresenter.sourceView = cell
+					popPresenter.sourceRect = cell.bounds
+				}
 				
 				let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
 					self.rowToDelete = -1

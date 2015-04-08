@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rH6-mW-7e0">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -289,6 +290,8 @@
                                 <rect key="frame" x="40" y="220" width="242" height="57"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="1K0-PR-xNB"/>
+                                    <constraint firstAttribute="width" constant="242" id="tsx-vo-Kb0"/>
+                                    <constraint firstAttribute="height" constant="57" id="yi5-Ya-eB7"/>
                                     <constraint firstAttribute="width" constant="242" id="ymC-ib-4yg"/>
                                 </constraints>
                                 <state key="normal" image="default_standardcolors">
@@ -306,6 +309,10 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLe-x0-kWu">
                                 <rect key="frame" x="40" y="307" width="157" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="157" id="AfU-UK-3s7"/>
+                                    <constraint firstAttribute="height" constant="56" id="Ukd-rf-a6l"/>
+                                </constraints>
                                 <state key="normal" image="default_customize">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -332,6 +339,7 @@
                         <constraints>
                             <constraint firstItem="ICl-aJ-Sqd" firstAttribute="top" secondItem="jhZ-NB-M02" secondAttribute="bottom" constant="20" id="3if-tT-V9P"/>
                             <constraint firstItem="QGT-VO-Yul" firstAttribute="top" secondItem="ICl-aJ-Sqd" secondAttribute="bottom" constant="30" id="8rl-lY-ldJ"/>
+                            <constraint firstAttribute="centerY" secondItem="rMt-42-cmT" secondAttribute="centerY" priority="800" id="Ape-Mg-hRc"/>
                             <constraint firstItem="Nlf-0N-CoR" firstAttribute="leading" secondItem="Icq-fg-E5j" secondAttribute="leading" constant="40" id="Eey-8u-45y"/>
                             <constraint firstItem="rLe-x0-kWu" firstAttribute="top" secondItem="Nlf-0N-CoR" secondAttribute="bottom" constant="30" id="Gee-rY-RdC"/>
                             <constraint firstItem="rMt-42-cmT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="2S0-HG-IwY" secondAttribute="bottom" constant="-40" id="LBS-PM-Kqi"/>
@@ -339,10 +347,27 @@
                             <constraint firstItem="rLe-x0-kWu" firstAttribute="leading" secondItem="Nlf-0N-CoR" secondAttribute="leading" id="ML0-gS-Y5H"/>
                             <constraint firstItem="ICl-aJ-Sqd" firstAttribute="leading" secondItem="jhZ-NB-M02" secondAttribute="leading" id="awM-09-zZC"/>
                             <constraint firstItem="rMt-42-cmT" firstAttribute="leading" secondItem="Icq-fg-E5j" secondAttribute="leading" constant="4" id="blp-aF-QYa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rMt-42-cmT" secondAttribute="trailing" priority="800" id="mvH-hZ-p3g"/>
                             <constraint firstAttribute="centerY" secondItem="Nlf-0N-CoR" secondAttribute="centerY" constant="20" id="n2M-0v-hSC"/>
-                            <constraint firstItem="Nlf-0N-CoR" firstAttribute="top" secondItem="rMt-42-cmT" secondAttribute="bottom" priority="800" id="wTK-Dd-dPg"/>
+                            <constraint firstItem="Nlf-0N-CoR" firstAttribute="top" secondItem="rMt-42-cmT" secondAttribute="bottom" priority="900" id="wTK-Dd-dPg"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="_chairImageViewBottomConstraint" destination="wTK-Dd-dPg" id="AxX-ET-Tlx"/>
+                        <outlet property="_chairImageViewHeightConstraint" destination="E2o-RN-S3Z" id="6YD-mF-ejD"/>
+                        <outlet property="_chairImageViewLeadingConstraint" destination="blp-aF-QYa" id="BON-qZ-exb"/>
+                        <outlet property="_chairImageViewTopConstraint" destination="LBS-PM-Kqi" id="Ncg-UT-PHl"/>
+                        <outlet property="_chairImageViewWidthConstraint" destination="c4f-1w-eEK" id="71j-dV-9Jp"/>
+                        <outlet property="_customizeButtonHeightConstraint" destination="Ukd-rf-a6l" id="8GZ-JP-jDR"/>
+                        <outlet property="_customizeButtonTopConstraint" destination="Gee-rY-RdC" id="iCt-1Y-j2h"/>
+                        <outlet property="_customizeButtonWidthConstraint" destination="AfU-UK-3s7" id="BbQ-Ph-UWp"/>
+                        <outlet property="_standardButtonCenterYConstraint" destination="n2M-0v-hSC" id="F41-0p-A4H"/>
+                        <outlet property="_standardButtonHeightConstraint" destination="yi5-Ya-eB7" id="HUU-P9-7QG"/>
+                        <outlet property="_standardButtonWidthConstraint" destination="tsx-vo-Kb0" id="yn4-3y-Qho"/>
+                        <outlet property="chairImageView" destination="rMt-42-cmT" id="NTK-RR-fqH"/>
+                        <outlet property="customizeButton" destination="rLe-x0-kWu" id="B9R-LP-3cj"/>
+                        <outlet property="standardButton" destination="Nlf-0N-CoR" id="cM4-gb-7AK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7L1-xl-pau" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -692,6 +717,8 @@
                                 <constraints>
                                     <constraint firstItem="uDf-kt-mC9" firstAttribute="leading" secondItem="goN-g1-2UN" secondAttribute="leading" priority="800" constant="20" id="2tj-eI-nRu"/>
                                     <constraint firstItem="Z4k-I2-9WU" firstAttribute="top" secondItem="5Wl-Wx-1PW" secondAttribute="top" id="3lz-mD-R8q"/>
+                                    <constraint firstAttribute="width" priority="800" constant="375" id="8Fs-W7-MkM"/>
+                                    <constraint firstAttribute="height" priority="800" constant="600" id="9qW-Qs-PNe"/>
                                     <constraint firstItem="RiH-rv-IkK" firstAttribute="top" secondItem="5Wl-Wx-1PW" secondAttribute="bottom" constant="35" id="B4K-XN-SDH"/>
                                     <constraint firstItem="Cu9-WC-3ud" firstAttribute="top" secondItem="goN-g1-2UN" secondAttribute="top" id="FMv-k8-HHl"/>
                                     <constraint firstItem="RiH-rv-IkK" firstAttribute="trailing" secondItem="5Wl-Wx-1PW" secondAttribute="trailing" id="Geg-TJ-ByE"/>
@@ -752,27 +779,36 @@
                             <constraint firstItem="Qah-Ob-jT0" firstAttribute="top" secondItem="iRQ-1i-M4u" secondAttribute="top" id="1fL-OR-g4E"/>
                             <constraint firstAttribute="trailing" secondItem="goN-g1-2UN" secondAttribute="trailing" id="6Qg-kd-lfR"/>
                             <constraint firstItem="c1f-kz-kf9" firstAttribute="top" secondItem="3dX-dE-sVC" secondAttribute="bottom" id="7a8-hH-h8h"/>
-                            <constraint firstItem="goN-g1-2UN" firstAttribute="top" secondItem="nCJ-Sj-643" secondAttribute="bottom" priority="800" id="AMt-1W-KGN"/>
+                            <constraint firstItem="goN-g1-2UN" firstAttribute="top" secondItem="nCJ-Sj-643" secondAttribute="bottom" priority="700" id="AMt-1W-KGN"/>
                             <constraint firstItem="3dX-dE-sVC" firstAttribute="leading" secondItem="iRQ-1i-M4u" secondAttribute="leading" id="BJq-aL-pcN"/>
                             <constraint firstAttribute="trailing" secondItem="3dX-dE-sVC" secondAttribute="trailing" id="Emo-h0-NhB"/>
                             <constraint firstItem="3dX-dE-sVC" firstAttribute="top" secondItem="Qah-Ob-jT0" secondAttribute="bottom" id="L1p-Rn-Zuy"/>
                             <constraint firstItem="goN-g1-2UN" firstAttribute="top" secondItem="iRQ-1i-M4u" secondAttribute="top" priority="800" id="PYI-4X-Ou7"/>
                             <constraint firstAttribute="trailing" secondItem="Qah-Ob-jT0" secondAttribute="trailing" id="X4A-JL-ud2"/>
-                            <constraint firstItem="goN-g1-2UN" firstAttribute="top" secondItem="3dX-dE-sVC" secondAttribute="bottom" priority="900" id="f10-lC-Gix"/>
+                            <constraint firstItem="goN-g1-2UN" firstAttribute="top" secondItem="3dX-dE-sVC" secondAttribute="bottom" priority="800" id="f10-lC-Gix"/>
                             <constraint firstItem="c1f-kz-kf9" firstAttribute="top" secondItem="goN-g1-2UN" secondAttribute="bottom" id="kzf-1Q-otO"/>
+                            <constraint firstAttribute="bottom" secondItem="goN-g1-2UN" secondAttribute="bottom" constant="50" id="qy6-L4-njE"/>
+                            <constraint firstItem="goN-g1-2UN" firstAttribute="width" secondItem="iRQ-1i-M4u" secondAttribute="width" id="riV-zT-bQp"/>
                             <constraint firstItem="goN-g1-2UN" firstAttribute="leading" secondItem="iRQ-1i-M4u" secondAttribute="leading" id="yf9-RN-hNB"/>
                             <constraint firstItem="Qah-Ob-jT0" firstAttribute="leading" secondItem="iRQ-1i-M4u" secondAttribute="leading" id="zSF-GI-46j"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="kzf-1Q-otO"/>
+                                <exclude reference="6Qg-kd-lfR"/>
                                 <exclude reference="PYI-4X-Ou7"/>
+                                <exclude reference="qy6-L4-njE"/>
+                                <exclude reference="kzf-1Q-otO"/>
                             </mask>
                         </variation>
                     </view>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="_colorPickerViewBottomConstraint" destination="qy6-L4-njE" id="4o3-mh-RSn"/>
+                        <outlet property="_colorPickerViewHeightConstraint" destination="0bQ-tN-AM2" id="O6l-c4-eht"/>
                         <outlet property="_colorPickerViewHidingTopConstraint" destination="f10-lC-Gix" id="S3K-fk-LNk"/>
+                        <outlet property="_colorPickerViewLeadingConstraint" destination="yf9-RN-hNB" id="Jas-Yt-akm"/>
+                        <outlet property="_colorPickerViewTopConstraint" destination="AMt-1W-KGN" id="y8p-4B-5WS"/>
+                        <outlet property="_colorPickerViewWidthConstraint" destination="riV-zT-bQp" id="S2q-zc-EfC"/>
                         <outlet property="chairFinishToggle" destination="1mJ-9C-aJU" id="qVq-H4-sZK"/>
                         <outlet property="colorPickerView" destination="goN-g1-2UN" id="uO9-37-pM0"/>
                         <outlet property="gradientCreatorView" destination="3dX-dE-sVC" id="PxC-zc-K9f"/>
@@ -1527,6 +1563,9 @@ For more information please visit our websites:
                             <outlet property="delegate" destination="tCQ-1x-4C7" id="49M-aC-IWX"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="pushNotificationsSwitch" destination="bEH-98-ASd" id="omd-hQ-s5c"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3mz-qq-kIh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

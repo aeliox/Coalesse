@@ -2,6 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,22 +12,60 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="tra-pf-e0M">
-                    <rect key="frame" x="40" y="190" width="151" height="99"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Umb-7c-nyP">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="8BS-1h-g6U">
+                            <rect key="frame" x="40" y="192" width="146" height="96"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="151" id="21m-OT-Wcw"/>
+                                <constraint firstAttribute="width" secondItem="8BS-1h-g6U" secondAttribute="height" multiplier="151:99" id="6Bi-sX-xSC"/>
+                                <constraint firstAttribute="width" constant="151" id="KB0-fd-fkU"/>
+                                <constraint firstAttribute="width" secondItem="8BS-1h-g6U" secondAttribute="height" multiplier="151:99" id="Mvj-X8-HfV"/>
+                                <constraint firstAttribute="width" secondItem="8BS-1h-g6U" secondAttribute="height" multiplier="151:99" id="N2a-vd-Txk"/>
+                                <constraint firstAttribute="height" constant="99" id="s5F-bb-uHB"/>
+                                <constraint firstAttribute="height" constant="99" id="wB0-0E-gEb"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="21m-OT-Wcw"/>
+                                    <exclude reference="6Bi-sX-xSC"/>
+                                    <exclude reference="KB0-fd-fkU"/>
+                                    <exclude reference="N2a-vd-Txk"/>
+                                    <exclude reference="s5F-bb-uHB"/>
+                                    <exclude reference="wB0-0E-gEb"/>
+                                </mask>
+                            </variation>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="99" id="fkL-iQ-JQr"/>
-                        <constraint firstAttribute="width" constant="151" id="veK-ey-28E"/>
+                        <constraint firstItem="8BS-1h-g6U" firstAttribute="leading" secondItem="Umb-7c-nyP" secondAttribute="leading" constant="40" id="1YB-De-VuS"/>
+                        <constraint firstItem="8BS-1h-g6U" firstAttribute="height" secondItem="Umb-7c-nyP" secondAttribute="height" multiplier="0.2" id="6FH-H1-NOW"/>
+                        <constraint firstAttribute="height" secondItem="8BS-1h-g6U" secondAttribute="height" multiplier="4.9" id="ElI-qU-haO"/>
+                        <constraint firstAttribute="centerY" secondItem="8BS-1h-g6U" secondAttribute="centerY" id="avj-1H-n1h"/>
+                        <constraint firstAttribute="width" secondItem="8BS-1h-g6U" secondAttribute="width" multiplier="3.2" id="cK3-Pi-ybu"/>
+                        <constraint firstItem="8BS-1h-g6U" firstAttribute="width" secondItem="Umb-7c-nyP" secondAttribute="width" multiplier="0.3" id="irO-2Z-iCY"/>
                     </constraints>
-                </imageView>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="ElI-qU-haO"/>
+                            <exclude reference="cK3-Pi-ybu"/>
+                            <exclude reference="irO-2Z-iCY"/>
+                        </mask>
+                    </variation>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="tra-pf-e0M" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="M7i-4L-eOk"/>
-                <constraint firstAttribute="centerY" secondItem="tra-pf-e0M" secondAttribute="centerY" id="mSg-vF-MBE"/>
+                <constraint firstItem="Umb-7c-nyP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="GhI-Fs-C3n"/>
+                <constraint firstAttribute="trailing" secondItem="Umb-7c-nyP" secondAttribute="trailing" id="HKz-pS-JCa"/>
+                <constraint firstAttribute="bottom" secondItem="Umb-7c-nyP" secondAttribute="bottom" id="eUJ-mL-veS"/>
+                <constraint firstItem="Umb-7c-nyP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zw6-nL-mJK"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="548" y="455"/>
+            <point key="canvasLocation" x="542.5" y="452.5"/>
         </view>
     </objects>
     <resources>

@@ -18,7 +18,12 @@ class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate
 	@IBOutlet weak var chairFinishToggle: UISegmentedControl!
 	@IBOutlet weak var gradientCreatorView: GradientCreatorView!
 	@IBOutlet weak var colorPickerView: ColorPickerView!
+	@IBOutlet weak var _colorPickerViewLeadingConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _colorPickerViewTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var _colorPickerViewHidingTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _colorPickerViewBottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _colorPickerViewWidthConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _colorPickerViewHeightConstraint: NSLayoutConstraint!
 	
 	
 	var gradientColors: [UIColor]?
@@ -44,6 +49,7 @@ class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate
 		
 		if self.design == nil {
 			gradientColors = [UIColor.random(),UIColor.random()]
+			gradientOffsets = [0.0,1.0]
 		} else {
 			gradientColors = self.design!.colors()
 			gradientOffsets = self.design!.locations()
@@ -56,13 +62,32 @@ class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate
 		mainImageView.backgroundColor = UIColor.clearColor()
 		mainImageView.setBackgroundColorRed(1.0, green: 1.0, blue: 1.0, alpha: 0.0)
 		
+		
+		
+		
+		
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateGradient", name: "GradientCreatorChanged", object: nil)
 		
 		delay(0.1) {
-			if self.design != nil {
-				self.gradientCreatorView.offsets = self.gradientOffsets
-				self.gradientOffsets = []
+			if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+				self.view.removeConstraint(self._colorPickerViewTopConstraint)
+				self.view.removeConstraint(self._colorPickerViewHidingTopConstraint)
+				self.view.removeConstraint(self._colorPickerViewWidthConstraint)
+				self.view.removeConstraint(self._colorPickerViewHeightConstraint)
+				
+				self.view.addConstraint(self._colorPickerViewBottomConstraint)
+				
+				self.colorPickerView.alpha = 0.0
+				self._colorPickerViewBottomConstraint.constant = 0.0
+				self.colorPickerView.layer.cornerRadius = 12.0
+				self.colorPickerView.layer.shadowColor = UIColor.grayColor().CGColor
+				self.colorPickerView.layer.shadowOpacity = 0.3
+				self.colorPickerView.layer.shadowRadius = 12.0
 			}
+			
+			
+			self.gradientCreatorView.offsets = self.gradientOffsets
+			self.gradientOffsets = []
 			
 			self.updateGradient()
 		}
@@ -91,6 +116,44 @@ class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate
 		}
 	}
 	
+	override func didMoveToParentViewController(parent: UIViewController?) {
+		super.didMoveToParentViewController(parent)
+		
+		if self.parentViewController != nil {
+			
+			if NSUserDefaults.standardUserDefaults().objectForKey("hasVisitedTheCustomizer") == nil {
+				
+				let alertController = UIAlertController(title: "Custom Design Builder", message: "Tap the color swatches below to change their color. Drag the color swatches to adjust the gradient.", preferredStyle: .Alert)
+				
+				let cancelAction = UIAlertAction(title: "Got It!", style: .Cancel) { (action) in
+					
+				}
+				alertController.addAction(cancelAction)
+				
+				self.presentViewController(alertController, animated: true) {
+					NSUserDefaults.standardUserDefaults().setObject("yup", forKey: "hasVisitedTheCustomizer")
+					NSUserDefaults.standardUserDefaults().synchronize()
+				}
+				
+			}
+			
+		}
+	}
+	
+	override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+		super.didRotateFromInterfaceOrientation(fromInterfaceOrientation)
+		
+		self.gradientCreatorView.offsets = self.gradientOffsets
+		self.gradientOffsets = []
+		
+		updateGradient()
+		
+		if self.swatchEditing != nil && UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+			var offset = self.swatchEditing!.frame.origin.x + (self.swatchEditing!.bounds.size.width / 2.0) - (self.colorPickerView.bounds.size.width / 2.0)
+			_colorPickerViewLeadingConstraint.constant = min(max(0,offset),(self.view.bounds.size.width - self.colorPickerView.bounds.size.width))
+		}
+	}
+	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
@@ -108,16 +171,46 @@ class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate
 		self.swatchEditing = (tap.view! as SwatchThumbnail)
 		self.colorPickerView.color = self.swatchEditing!.swatchView.backgroundColor!
 		
+		
+		if NSUserDefaults.standardUserDefaults().objectForKey("hasVisitedTheColorPicker") == nil {
+			
+			let alertController = UIAlertController(title: "Custom Design Color Picker", message: "Drag to select a hue, saturation, and brightness value. Alternatively, tap the camera icon in the top right corner to match a color from a photo.", preferredStyle: .Alert)
+			
+			let cancelAction = UIAlertAction(title: "Got It!", style: .Cancel) { (action) in
+				
+			}
+			alertController.addAction(cancelAction)
+			
+			self.presentViewController(alertController, animated: true) {
+				NSUserDefaults.standardUserDefaults().setObject("yup", forKey: "hasVisitedTheColorPicker")
+				NSUserDefaults.standardUserDefaults().synchronize()
+			}
+			
+		}
+		
+		
 		var cameraButton = UIBarButtonItem(image: UIImage(named: "icon_camera"), style: .Plain, target: self, action: "cameraAction")
 		cameraButton.tintColor = UIColor.lightGrayColor()
 		self.parentViewController!.navigationItem.rightBarButtonItem = cameraButton
 		
-		_colorPickerViewHidingTopConstraint.priority = 700
-		UIView.animateWithDuration(0.7, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: nil, animations: {
-			self.view.layoutIfNeeded()
-			}, completion: { finished in
-				
-		})
+		if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+			var offset = self.swatchEditing!.frame.origin.x + (self.swatchEditing!.bounds.size.width / 2.0) - (self.colorPickerView.bounds.size.width / 2.0)
+			_colorPickerViewLeadingConstraint.constant = min(max(0,offset),(self.view.bounds.size.width - self.colorPickerView.bounds.size.width))
+			_colorPickerViewBottomConstraint.constant = 50.0
+			UIView.animateWithDuration(0.7, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: nil, animations: {
+				self.view.layoutIfNeeded()
+				self.colorPickerView.alpha = 1.0
+				}, completion: { finished in
+					
+			})
+		} else {
+			_colorPickerViewHidingTopConstraint.priority = 600
+			UIView.animateWithDuration(0.7, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: nil, animations: {
+				self.view.layoutIfNeeded()
+				}, completion: { finished in
+					
+			})
+		}
 	}
 	
 	@IBAction func chooseColorAction() {
@@ -127,16 +220,28 @@ class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate
 			self.gradientCreatorView.endColor = self.colorPickerView.color
 		}
 		
+		self.swatchEditing = nil
+		
 		var shareButton = UIBarButtonItem(image: UIImage(named: "icon_share"), style: .Plain, target: self, action: "shareAction")
 		shareButton.tintColor = UIColor.lightGrayColor()
 		self.parentViewController!.navigationItem.rightBarButtonItem = shareButton
 		
-		_colorPickerViewHidingTopConstraint.priority = 900
-		UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: nil, animations: {
-			self.view.layoutIfNeeded()
-			}, completion: { finished in
-				self.colorPickerView.image = nil
-		})
+		if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+			_colorPickerViewBottomConstraint.constant = 0.0
+			UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: nil, animations: {
+				self.view.layoutIfNeeded()
+				self.colorPickerView.alpha = 0.0
+				}, completion: { finished in
+					self.colorPickerView.image = nil
+			})
+		} else {
+			_colorPickerViewHidingTopConstraint.priority = 800
+			UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: nil, animations: {
+				self.view.layoutIfNeeded()
+				}, completion: { finished in
+					self.colorPickerView.image = nil
+			})
+		}
 	}
 	
 	
@@ -150,6 +255,12 @@ class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate
 		
 		
 		let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+		if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+			alertController.modalPresentationStyle = .Popover
+			var popPresenter = alertController.popoverPresentationController!;
+			popPresenter.barButtonItem = self.parentViewController!.navigationItem.rightBarButtonItem;
+			popPresenter.sourceRect = self.view.bounds
+		}
 		
 		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
 			
@@ -172,10 +283,16 @@ class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate
 		
 		let quoteAction = UIAlertAction(title: "Get a Design Quote", style: .Default) { (action) in
 			var mailPicker = MFMailComposeViewController()
+			
 			mailPicker.mailComposeDelegate = self
 			mailPicker.setToRecipients([coalesseEmail])
 			mailPicker.setSubject("<5 Custom Design Quote")
 			mailPicker.addAttachmentData(UIImageJPEGRepresentation(image, 0.8), mimeType: "image/jpeg", fileName: "design.jpg")
+			
+			let finish = self.chairFinishToggle.titleForSegmentAtIndex(self.chairFinishToggle.selectedSegmentIndex)
+			let startColor = self.gradientColors![0].hexString
+			let endColor = self.gradientColors![1].hexString
+			mailPicker.setMessageBody("Name:\nPhone:\n\nChair Finish: \(finish!)\nColors: \(startColor!) \(endColor!)", isHTML: false)
 			
 			self.presentViewController(mailPicker, animated: true, completion: nil)
 		}
@@ -186,6 +303,13 @@ class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate
 			let website = NSURL(string: "http://www.coalesse.com/")!
 			
 			let activityVC = UIActivityViewController(activityItems: [image,text,website], applicationActivities: nil)
+			if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+				activityVC.modalPresentationStyle = .Popover
+				var popPresenter = activityVC.popoverPresentationController!;
+				popPresenter.barButtonItem = self.parentViewController!.navigationItem.rightBarButtonItem;
+				popPresenter.sourceRect = self.view.bounds
+			}
+			
 			activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact]
 			
 			self.presentViewController(activityVC, animated: true, completion: nil)
@@ -268,6 +392,19 @@ class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate
 		if self.gradientCreatorView.colors != gradientColors! || self.gradientCreatorView.offsets != gradientOffsets {
 			gradientColors = self.gradientCreatorView.colors
 			gradientOffsets = self.gradientCreatorView.offsets
+			
+			
+			if self.swatchEditing != nil && UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+				self.swatchEditing = nil
+				
+				_colorPickerViewBottomConstraint.constant = 0.0
+				UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: nil, animations: {
+					self.view.layoutIfNeeded()
+					self.colorPickerView.alpha = 0.0
+					}, completion: { finished in
+						self.colorPickerView.image = nil
+				})
+			}
 			
 			
 			UIGraphicsBeginImageContextWithOptions(mainImageView.bounds.size, false, 0.0)
