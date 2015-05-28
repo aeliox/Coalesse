@@ -34,7 +34,7 @@ class StandardViewController: UIViewController {
 			["title": "Color Red to Pink", "key": "redpink_fade"]
 		]
 		
-		(self.swatchesView.viewWithTag(0)! as SwatchThumbnail).selected = true
+		(self.swatchesView.viewWithTag(0)! as! SwatchThumbnail).selected = true
 	}
 	
 	override func willMoveToParentViewController(parent: UIViewController?) {
@@ -78,7 +78,7 @@ class StandardViewController: UIViewController {
 	}
 	
 	@IBAction func changeSwatch(gesture: UITapGestureRecognizer) {
-		let swatch = gesture.view! as SwatchThumbnail
+		let swatch = gesture.view! as! SwatchThumbnail
 		
 		for view in swatchesView.subviews {
 			if let swatch = view as? SwatchThumbnail {

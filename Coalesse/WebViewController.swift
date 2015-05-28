@@ -74,7 +74,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 	
 	override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
 		if context == &myContext {
-			self.progressView.progress = Float(change[NSKeyValueChangeNewKey]! as NSNumber)
+			self.progressView.progress = Float(change[NSKeyValueChangeNewKey]! as! NSNumber)
 			progressViewDidChange()
 		} else {
 			super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
@@ -84,7 +84,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 	
 // MARK: WebView
 	
-	func webView(webView: WKWebView!, didFinishNavigation navigation: WKNavigation!) {
+	func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
 		if webView.title != nil {
 			self.titleLabel.text = webView.title!
 		}

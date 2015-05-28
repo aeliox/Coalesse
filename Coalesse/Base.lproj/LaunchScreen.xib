@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -15,7 +15,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Umb-7c-nyP">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="8BS-1h-g6U">
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="8BS-1h-g6U">
                             <rect key="frame" x="40" y="192" width="146" height="96"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="151" id="21m-OT-Wcw"/>
@@ -38,7 +38,7 @@
                             </variation>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="8BS-1h-g6U" firstAttribute="leading" secondItem="Umb-7c-nyP" secondAttribute="leading" constant="40" id="1YB-De-VuS"/>
                         <constraint firstItem="8BS-1h-g6U" firstAttribute="height" secondItem="Umb-7c-nyP" secondAttribute="height" multiplier="0.2" id="6FH-H1-NOW"/>
@@ -69,6 +69,6 @@
         </view>
     </objects>
     <resources>
-        <image name="splash_logo" width="151" height="99"/>
+        <image name="splash_logo" width="453" height="297"/>
     </resources>
 </document>

@@ -300,7 +300,7 @@ class ColorPickerView:UIView {
 	
 	
 	@IBAction func didPanColorValue(gesture: UIGestureRecognizer) {
-		let colorView = gesture.view! as ColorValuePickerView
+		let colorView = gesture.view! as! ColorValuePickerView
 		let touch = gesture.locationInView(colorView)
 		
 		colorView._crosshairsImageViewLeadingConstraint.constant = touch.x - (colorView.crosshairsImageView.bounds.size.width / 2.0)

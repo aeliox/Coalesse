@@ -37,7 +37,7 @@ class SettingsViewController: UITableViewController {
 	
 	@IBAction func switchChanged() {
 		if self.pushNotificationsSwitch.on {
-			(UIApplication.sharedApplication().delegate as AppDelegate).registerForPushNotifications()
+			(UIApplication.sharedApplication().delegate as! AppDelegate).registerForPushNotifications()
 		} else {
 			UIApplication.sharedApplication().unregisterForRemoteNotifications()
 		}

@@ -44,6 +44,8 @@
 		3894067B1AD255C4005D9D98 /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3894067A1AD255C4005D9D98 /* RLMSupport.swift */; };
 		3894067E1AD261D6005D9D98 /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3894067D1AD261D6005D9D98 /* Cells.swift */; };
 		389922491ACFB7C9004CB793 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389922481ACFB7C9004CB793 /* Helpers.swift */; };
+		38BD8AC01B163EE600536E91 /* CustomGaramond.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38BD8ABE1B163EE600536E91 /* CustomGaramond.ttf */; };
+		38BD8AC11B163EE600536E91 /* CustomGaramondBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38BD8ABF1B163EE600536E91 /* CustomGaramondBold.ttf */; };
 		38F76D401AC92769005F4852 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F76D3F1AC92769005F4852 /* WebViewController.swift */; };
 		38F76D441AC927C6005F4852 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F76D431AC927C6005F4852 /* WebKit.framework */; };
 		8B098D25425336E697CE6818 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484EE1B697C597C328D5BAD5 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -136,6 +138,8 @@
 		3894067A1AD255C4005D9D98 /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
 		3894067D1AD261D6005D9D98 /* Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		389922481ACFB7C9004CB793 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		38BD8ABE1B163EE600536E91 /* CustomGaramond.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CustomGaramond.ttf; sourceTree = "<group>"; };
+		38BD8ABF1B163EE600536E91 /* CustomGaramondBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CustomGaramondBold.ttf; sourceTree = "<group>"; };
 		38F76D3F1AC92769005F4852 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		38F76D431AC927C6005F4852 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		484EE1B697C597C328D5BAD5 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -275,6 +279,8 @@
 		3803BA6E1AB34F9F00EE1C52 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				38BD8ABE1B163EE600536E91 /* CustomGaramond.ttf */,
+				38BD8ABF1B163EE600536E91 /* CustomGaramondBold.ttf */,
 				38F76D451AC927D7005F4852 /* Frameworks */,
 				3803BA6F1AB34FA600EE1C52 /* Vendors */,
 				3803BA891AB3522C00EE1C52 /* Constants.swift */,
@@ -453,7 +459,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38BD8AC11B163EE600536E91 /* CustomGaramondBold.ttf in Resources */,
 				3803BA511AB34F2B00EE1C52 /* Main.storyboard in Resources */,
+				38BD8AC01B163EE600536E91 /* CustomGaramond.ttf in Resources */,
 				3803BA561AB34F2B00EE1C52 /* LaunchScreen.xib in Resources */,
 				3803BA531AB34F2B00EE1C52 /* Images.xcassets in Resources */,
 			);

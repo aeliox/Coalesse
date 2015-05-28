@@ -63,9 +63,9 @@ class SavedViewController: UICollectionViewController, UIActionSheetDelegate {
 	}
 	
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SavedDesignCell", forIndexPath: indexPath) as SavedDesignCell
+		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SavedDesignCell", forIndexPath: indexPath) as! SavedDesignCell
 		
-		cell.design = (self.designs!.objectAtIndex(UInt(indexPath.row)) as Design)
+		cell.design = (self.designs!.objectAtIndex(UInt(indexPath.row)) as! Design)
 		cell.alpha = 1.0
 		
 		if rowToDelete > -1 {
@@ -86,14 +86,14 @@ class SavedViewController: UICollectionViewController, UIActionSheetDelegate {
 	}
 	
 	override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-		let footer: UICollectionReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "EmptyFooter", forIndexPath: indexPath) as UICollectionReusableView
+		let footer: UICollectionReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "EmptyFooter", forIndexPath: indexPath) as! UICollectionReusableView
 		return footer
 	}
 	
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		let design = (self.designs!.objectAtIndex(UInt(indexPath.row)) as Design)
+		let design = (self.designs!.objectAtIndex(UInt(indexPath.row)) as! Design)
 		
-		(self.parentViewController! as MainViewController).showSavedDesign(design)
+		(self.parentViewController! as! MainViewController).showSavedDesign(design)
 	}
 	
 	@IBAction func didLongPress(gesture: UILongPressGestureRecognizer) {
@@ -125,7 +125,7 @@ class SavedViewController: UICollectionViewController, UIActionSheetDelegate {
 					let indexPath = NSIndexPath(forItem: self.rowToDelete!, inSection: 0)
 					self.rowToDelete = -1
 					
-					let design = self.designs!.objectAtIndex(UInt(indexPath.item)) as Design
+					let design = self.designs!.objectAtIndex(UInt(indexPath.item)) as! Design
 					let realm = RLMRealm.defaultRealm()
 					realm.beginWriteTransaction()
 					realm.deleteObject(design)

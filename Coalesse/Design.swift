@@ -16,7 +16,7 @@ class Design: RLMObject {
 	dynamic var imageData: NSData = NSData()
 	
 	func colors() -> [UIColor] {
-		return (NSKeyedUnarchiver.unarchiveObjectWithData(self.colorsData) as [UIColor])
+		return (NSKeyedUnarchiver.unarchiveObjectWithData(self.colorsData) as! [UIColor])
 	}
 	
 	func setColors(colors: [UIColor]) {
@@ -25,7 +25,7 @@ class Design: RLMObject {
 	
 	
 	func locations() -> [Float] {
-		return (NSKeyedUnarchiver.unarchiveObjectWithData(self.locationsData) as [Float])
+		return (NSKeyedUnarchiver.unarchiveObjectWithData(self.locationsData) as! [Float])
 	}
 	
 	func setLocations(locations: [Float]) {
@@ -34,7 +34,7 @@ class Design: RLMObject {
 	
 	
 	func image() -> UIImage {
-		return (NSKeyedUnarchiver.unarchiveObjectWithData(self.imageData) as UIImage)
+		return (NSKeyedUnarchiver.unarchiveObjectWithData(self.imageData) as! UIImage)
 	}
 	
 	func setImage(image: UIImage) {

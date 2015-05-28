@@ -15,13 +15,24 @@ class AboutViewController: UIViewController, UITextViewDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		var text = aboutTextView.text as NSString
+		
+		var attributedText = NSMutableAttributedString(string: text as String, attributes: [NSFontAttributeName: UIFont(name: "Garamond", size: 18.0)!, NSForegroundColorAttributeName: UIColor.blackColor()])
+		
+		attributedText.addAttributes([NSFontAttributeName: UIFont(name: "Garamond-Bold", size: 18.0)!], range: text.rangeOfString("bring new life to work"))
+		attributedText.addAttributes([NSFontAttributeName: UIFont(name: "Garamond-Bold", size: 18.0)!], range: text.rangeOfString("coalesse.com"))
+		
+		aboutTextView.text = ""
+		aboutTextView.attributedText = attributedText
+		
+		
 		if self.view.bounds.size.height <= 568.0 || UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-			var text = aboutTextView.attributedText.mutableCopy() as NSMutableAttributedString
+			var text = aboutTextView.attributedText.mutableCopy() as! NSMutableAttributedString
 			text.beginEditing()
 			text.enumerateAttribute(NSFontAttributeName, inRange: NSMakeRange(0, text.length), options: nil, usingBlock: { (let value, let range, let stop) -> Void in
 				if value != nil {
-					let oldFont = value as UIFont;
-					let newFont = oldFont.fontWithSize((UIDevice.currentDevice().userInterfaceIdiom == .Pad ? 18.0 : (self.view.bounds.size.height <= 480.0 ? 11.0 : 13.0 )))
+					let oldFont = value as! UIFont;
+					let newFont = oldFont.fontWithSize((UIDevice.currentDevice().userInterfaceIdiom == .Pad ? 26.0 : 15.0))
 					text.removeAttribute(NSFontAttributeName, range: range)
 					text.addAttribute(NSFontAttributeName, value: newFont, range: range)
 				}
@@ -49,7 +60,7 @@ class AboutViewController: UIViewController, UITextViewDelegate {
 	}
 	
 	
-	func textView(textView: UITextView!, shouldInteractWithURL URL: NSURL!, inRange characterRange: NSRange) -> Bool {
+	func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
 		NSNotificationCenter.defaultCenter().postNotificationName("ShowWebView", object: URL)
 		
 		return false

@@ -168,7 +168,7 @@ class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate
 // MARK: Colors
 	
 	@IBAction func editSwatch(tap: UITapGestureRecognizer) {
-		self.swatchEditing = (tap.view! as SwatchThumbnail)
+		self.swatchEditing = (tap.view! as! SwatchThumbnail)
 		self.colorPickerView.color = self.swatchEditing!.swatchView.backgroundColor!
 		
 		
@@ -278,6 +278,18 @@ class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate
 			design.setLocations(self.gradientOffsets)
 			design.setImage(image)
 			realm.commitWriteTransaction()
+			
+			let alertController = UIAlertController(title: "Saved", message: "Your custom design has been saved!", preferredStyle: .Alert)
+			
+			let cancelAction = UIAlertAction(title: "OK", style: .Cancel) { (action) in
+				
+			}
+			alertController.addAction(cancelAction)
+			
+			self.presentViewController(alertController, animated: true) {
+				
+			}
+			
 		}
 		alertController.addAction(saveAction)
 		
@@ -364,7 +376,7 @@ class CustomizeViewController: UIViewController, UIImagePickerControllerDelegate
 	
 	
 	func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-		var image = info[UIImagePickerControllerOriginalImage] as UIImage
+		var image = info[UIImagePickerControllerOriginalImage] as! UIImage
 		self.colorPickerView.image = image
 		
 		var hueWheelButton = UIButton(frame: CGRectMake(0,0,26,26))
@@ -480,10 +492,10 @@ class SaveDesign: UIActivity {
 		
 		realm.beginWriteTransaction()
 		var design = Design.createInDefaultRealmWithObject([
-			"finish": self.designDict!["finish"] as Int
+			"finish": self.designDict!["finish"] as! Int
 			])
-		design.setColors(self.designDict!["colors"] as [UIColor])
-		design.setLocations(self.designDict!["locations"] as [Float])
+		design.setColors(self.designDict!["colors"] as! [UIColor])
+		design.setLocations(self.designDict!["locations"] as! [Float])
 		design.setImage(self.designImage!)
 		realm.commitWriteTransaction()
 	}

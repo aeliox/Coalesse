@@ -20,8 +20,8 @@ class MenuTransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UI
 		
 		let screens: (from: UIViewController, to: UIViewController) = (transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!, transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!)
 		
-		let menuViewController = !self.presenting ? screens.from as MenuViewController : screens.to as MenuViewController
-		let bottomViewController = !self.presenting ? screens.to as UIViewController : screens.from as UIViewController
+		let menuViewController = !self.presenting ? screens.from as! MenuViewController : screens.to as! MenuViewController
+		let bottomViewController = !self.presenting ? screens.to as UIViewController : screens.from as! UIViewController
 		
 		let menuView = menuViewController.view
 		

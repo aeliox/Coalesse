@@ -54,11 +54,11 @@ class MainViewController: UIViewController {
 	func openViewController(notification: NSNotification, savedDesign: Design? = nil) {
 		var newViewController: UIViewController?
 		
-		switch notification.object as String {
+		switch notification.object as! String {
 		case "customize":
 			newViewController = self.storyboard!.instantiateViewControllerWithIdentifier("CustomizeVC") as? CustomizeViewController
 			if savedDesign != nil {
-				(newViewController as CustomizeViewController).design = savedDesign
+				(newViewController as! CustomizeViewController).design = savedDesign
 			}
 		case "standard":
 			newViewController = self.storyboard!.instantiateViewControllerWithIdentifier("StandardVC") as? StandardViewController
@@ -75,7 +75,7 @@ class MainViewController: UIViewController {
 		
 		if newViewController != nil {
 			let newController = newViewController!
-			let oldController = childViewControllers.last as UIViewController
+			let oldController = childViewControllers.last as! UIViewController
 			
 			oldController.willMoveToParentViewController(nil)
 			newController.willMoveToParentViewController(self)
@@ -118,7 +118,7 @@ class MainViewController: UIViewController {
 		let webNavVC = self.storyboard!.instantiateViewControllerWithIdentifier("WebNavVC") as? UINavigationController
 		let webVC = webNavVC!.viewControllers![0] as? WebViewController
 		
-		webVC!.url = (notification.object as NSURL)
+		webVC!.url = (notification.object as! NSURL)
 		
 		self.navigationController!.presentViewController(webNavVC!, animated: true, completion: nil)
 	}
@@ -126,8 +126,10 @@ class MainViewController: UIViewController {
 
 
 class DefaultViewController: UIViewController {
+	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var _titleLabelLeadingConstraint: NSLayoutConstraint!
+	@IBOutlet weak var captionLabel: UILabel!
 	@IBOutlet weak var chairImageView: UIImageView!
-	@IBOutlet weak var _chairImageViewTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var _chairImageViewBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var _chairImageViewLeadingConstraint: NSLayoutConstraint!
 	@IBOutlet weak var _chairImageViewWidthConstraint: NSLayoutConstraint!
@@ -140,32 +142,53 @@ class DefaultViewController: UIViewController {
 	@IBOutlet weak var _customizeButtonTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var _customizeButtonWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var _customizeButtonHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var footerLogo: UIImageView!
 	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-			self.view.removeConstraint(self._chairImageViewTopConstraint)
-			self.view.removeConstraint(self._chairImageViewBottomConstraint)
-			self.view.removeConstraint(self._chairImageViewLeadingConstraint)
+		if self.view.bounds.size.width <= 320.0 {
+			self._titleLabelLeadingConstraint.constant = 15.0
+			self._standardButtonCenterYConstraint.constant = -50.0
 			
-			self._chairImageViewWidthConstraint.constant = 313.0
-			self._chairImageViewHeightConstraint.constant = 334.0
+			if self.view.bounds.size.height <= 480.0 {
+				self._standardButtonCenterYConstraint.constant = -80.0
+				self.footerLogo.hidden = true
+			}
+			
+			self.view.updateConstraints()
+			self.view.layoutIfNeeded()
+		}
+		
+		if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+			self.titleLabel.font = self.titleLabel.font.fontWithSize(32.0)
+			self.captionLabel.font = self.captionLabel.font.fontWithSize(24.0)
+			
 			self.chairImageView.image = UIImage(named: "default_chair_ipad")
+			self._chairImageViewWidthConstraint.constant = 278.0
+			self._chairImageViewHeightConstraint.constant = 270.0
 			
 			self._standardButtonCenterYConstraint.constant = 80.0
-			self._standardButtonWidthConstraint.constant = 363.0
-			self._standardButtonHeightConstraint.constant = 85.0
+			self._standardButtonWidthConstraint.constant = 434.0
+			self._standardButtonHeightConstraint.constant = 60.0
 			self.standardButton.setImage(UIImage(named: "default_standardcolors_ipad"), forState: .Normal)
 			
 			self._customizeButtonTopConstraint.constant = 50.0
-			self._customizeButtonWidthConstraint.constant = 235.0
-			self._customizeButtonHeightConstraint.constant = 84.0
+			self._customizeButtonWidthConstraint.constant = 365.0
+			self._customizeButtonHeightConstraint.constant = 60.0
 			self.customizeButton.setImage(UIImage(named: "default_customize_ipad"), forState: .Normal)
 			
 			self.view.updateConstraints()
 			self.view.layoutIfNeeded()
+			
+			delay(0.01) {
+				self.view.removeConstraint(self._chairImageViewBottomConstraint)
+				self.view.removeConstraint(self._chairImageViewLeadingConstraint)
+				
+				self.view.updateConstraints()
+				self.view.layoutIfNeeded()
+			}
 		}
 	}
 	
