@@ -127,14 +127,17 @@ class MainViewController: UIViewController {
 
 class DefaultViewController: UIViewController {
 	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var _titleLabelTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var _titleLabelLeadingConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _titleLabelTrailingConstraint: NSLayoutConstraint!
 	@IBOutlet weak var captionLabel: UILabel!
 	@IBOutlet weak var chairImageView: UIImageView!
 	@IBOutlet weak var _chairImageViewBottomConstraint: NSLayoutConstraint!
-	@IBOutlet weak var _chairImageViewLeadingConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _chairImageViewHorizontalCenterConstraint: NSLayoutConstraint!
 	@IBOutlet weak var _chairImageViewWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var _chairImageViewHeightConstraint: NSLayoutConstraint!
 	@IBOutlet weak var standardButton: UIButton!
+	@IBOutlet weak var _standardButtonCenterXConstraint: NSLayoutConstraint!
 	@IBOutlet weak var _standardButtonCenterYConstraint: NSLayoutConstraint!
 	@IBOutlet weak var _standardButtonWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var _standardButtonHeightConstraint: NSLayoutConstraint!
@@ -143,6 +146,8 @@ class DefaultViewController: UIViewController {
 	@IBOutlet weak var _customizeButtonWidthConstraint: NSLayoutConstraint!
 	@IBOutlet weak var _customizeButtonHeightConstraint: NSLayoutConstraint!
 	@IBOutlet weak var footerLogo: UIImageView!
+	@IBOutlet weak var _footerLogoCenterXConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _footerLogoBottomConstraint: NSLayoutConstraint!
 	
 	
 	override func viewDidLoad() {
@@ -150,10 +155,12 @@ class DefaultViewController: UIViewController {
 		
 		if self.view.bounds.size.width <= 320.0 {
 			self._titleLabelLeadingConstraint.constant = 15.0
-			self._standardButtonCenterYConstraint.constant = -50.0
+			self._titleLabelTrailingConstraint.constant = 15.0
+			self._footerLogoBottomConstraint.constant = 20.0
 			
 			if self.view.bounds.size.height <= 480.0 {
-				self._standardButtonCenterYConstraint.constant = -80.0
+				self._titleLabelTopConstraint.constant = 20.0
+				self._standardButtonCenterYConstraint.constant = -90.0
 				self.footerLogo.hidden = true
 			}
 			
@@ -163,28 +170,29 @@ class DefaultViewController: UIViewController {
 		
 		if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
 			self.titleLabel.font = self.titleLabel.font.fontWithSize(32.0)
-			self.captionLabel.font = self.captionLabel.font.fontWithSize(24.0)
+			self.titleLabel.textAlignment = .Left
+			self.captionLabel.font = self.captionLabel.font.fontWithSize(21.0)
+			self.captionLabel.textAlignment = .Left
 			
 			self.chairImageView.image = UIImage(named: "default_chair_ipad")
-			self._chairImageViewWidthConstraint.constant = 278.0
-			self._chairImageViewHeightConstraint.constant = 270.0
+			self._chairImageViewWidthConstraint.constant = 768.0
+			self._chairImageViewHeightConstraint.constant = 768.0
 			
-			self._standardButtonCenterYConstraint.constant = 80.0
-			self._standardButtonWidthConstraint.constant = 434.0
-			self._standardButtonHeightConstraint.constant = 60.0
-			self.standardButton.setImage(UIImage(named: "default_standardcolors_ipad"), forState: .Normal)
+			self._standardButtonCenterYConstraint.constant = 60.0
 			
-			self._customizeButtonTopConstraint.constant = 50.0
-			self._customizeButtonWidthConstraint.constant = 365.0
-			self._customizeButtonHeightConstraint.constant = 60.0
-			self.customizeButton.setImage(UIImage(named: "default_customize_ipad"), forState: .Normal)
+			self.standardButton.contentHorizontalAlignment = .Left
+			self.customizeButton.contentHorizontalAlignment = .Left
+			
 			
 			self.view.updateConstraints()
 			self.view.layoutIfNeeded()
 			
 			delay(0.01) {
 				self.view.removeConstraint(self._chairImageViewBottomConstraint)
-				self.view.removeConstraint(self._chairImageViewLeadingConstraint)
+				self.view.removeConstraint(self._chairImageViewHorizontalCenterConstraint)
+				
+				self.view.removeConstraint(self._standardButtonCenterXConstraint)
+				self.view.removeConstraint(self._footerLogoCenterXConstraint)
 				
 				self.view.updateConstraints()
 				self.view.layoutIfNeeded()

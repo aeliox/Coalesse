@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rH6-mW-7e0">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -9,6 +10,10 @@
         <mutableArray key="CustomGaramond.ttf">
             <string>Garamond</string>
             <string>Garamond</string>
+        </mutableArray>
+        <mutableArray key="CustomGaramondBold.ttf">
+            <string>Garamond-Bold</string>
+            <string>Garamond-Bold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -285,15 +290,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_chair" translatesAutoresizingMaskIntoConstraints="NO" id="rMt-42-cmT">
-                                <rect key="frame" x="20" y="120" width="130" height="126"/>
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_chair" translatesAutoresizingMaskIntoConstraints="NO" id="rMt-42-cmT">
+                                <rect key="frame" x="120" y="-34" width="360" height="360"/>
+                                <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="rMt-42-cmT" secondAttribute="height" multiplier="65:63" id="3cg-e6-bKi"/>
                                     <constraint firstAttribute="height" constant="126" id="E2o-RN-S3Z"/>
+                                    <constraint firstAttribute="width" secondItem="rMt-42-cmT" secondAttribute="height" multiplier="1:1" id="OAJ-bU-lHI"/>
                                     <constraint firstAttribute="width" constant="130" id="c4f-1w-eEK"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="3cg-e6-bKi"/>
+                                        <exclude reference="E2o-RN-S3Z"/>
+                                        <exclude reference="c4f-1w-eEK"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="HFB-qC-YwO" appends="YES" id="jCy-Cs-96g"/>
+                                </connections>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleAspectFit" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nlf-0N-CoR">
-                                <rect key="frame" x="40" y="266" width="289" height="44"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nlf-0N-CoR">
+                                <rect key="frame" x="156" y="326" width="289" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="1K0-PR-xNB"/>
                                     <constraint firstAttribute="width" priority="900" constant="289" id="tsx-vo-Kb0"/>
@@ -313,8 +331,8 @@
                                     <action selector="standardAction" destination="nP2-dp-Olk" eventType="touchUpInside" id="Xb6-mx-tLz"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLe-x0-kWu">
-                                <rect key="frame" x="40" y="335" width="289" height="44"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLe-x0-kWu">
+                                <rect key="frame" x="156" y="395" width="289" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="900" constant="243" id="AfU-UK-3s7"/>
                                     <constraint firstAttribute="height" constant="44" id="Ukd-rf-a6l"/>
@@ -332,49 +350,57 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_logo" translatesAutoresizingMaskIntoConstraints="NO" id="GTU-wA-RL5">
-                                <rect key="frame" x="40" y="464" width="100" height="22"/>
+                                <rect key="frame" x="250" y="464" width="100" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="ZkH-6U-56T"/>
                                     <constraint firstAttribute="height" constant="22" id="mbQ-sW-Tm7"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bespoke Inspiration: &lt;5_MY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Zs-PP-lf9">
-                                <rect key="frame" x="40" y="25" width="267" height="24"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;5_MY: Color Experience" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTM-vm-QLz">
+                                <rect key="frame" x="40" y="30" width="520" height="27"/>
+                                <fontDescription key="fontDescription" name="Garamond-Bold" family="Garamond" pointSize="24"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTM-vm-QLz">
-                                <rect key="frame" x="40" y="55" width="181" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEO-VJ-60X">
+                                <rect key="frame" x="40" y="65" width="520" height="36"/>
                                 <string key="text">Customize the &lt;5_MY chair.
 Be inspired or be inspiring.</string>
                                 <fontDescription key="fontDescription" name="Garamond" family="Garamond" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="iTM-vm-QLz" firstAttribute="leading" secondItem="1Zs-PP-lf9" secondAttribute="leading" id="1vn-Nb-wNm"/>
                             <constraint firstItem="QGT-VO-Yul" firstAttribute="top" secondItem="GTU-wA-RL5" secondAttribute="bottom" constant="50" id="2Kn-XG-Hfn"/>
-                            <constraint firstItem="1Zs-PP-lf9" firstAttribute="top" secondItem="2S0-HG-IwY" secondAttribute="bottom" constant="25" id="2le-mC-17p"/>
-                            <constraint firstItem="Nlf-0N-CoR" firstAttribute="leading" secondItem="1Zs-PP-lf9" secondAttribute="leading" id="97D-VU-czr"/>
+                            <constraint firstAttribute="centerX" secondItem="GTU-wA-RL5" secondAttribute="centerX" id="9T0-BC-9Q9"/>
                             <constraint firstAttribute="centerY" secondItem="rMt-42-cmT" secondAttribute="centerY" priority="800" id="Ape-Mg-hRc"/>
+                            <constraint firstItem="iTM-vm-QLz" firstAttribute="top" secondItem="2S0-HG-IwY" secondAttribute="bottom" constant="30" id="EL7-3z-Jo3"/>
                             <constraint firstItem="Nlf-0N-CoR" firstAttribute="leading" secondItem="Icq-fg-E5j" secondAttribute="leading" constant="40" id="Eey-8u-45y"/>
-                            <constraint firstItem="1Zs-PP-lf9" firstAttribute="leading" secondItem="Icq-fg-E5j" secondAttribute="leading" constant="40" id="FcB-Kf-ckL"/>
+                            <constraint firstItem="Nlf-0N-CoR" firstAttribute="leading" secondItem="iTM-vm-QLz" secondAttribute="leading" priority="800" id="F1b-Va-DUw"/>
                             <constraint firstItem="rLe-x0-kWu" firstAttribute="top" secondItem="Nlf-0N-CoR" secondAttribute="bottom" constant="25" id="Gee-rY-RdC"/>
-                            <constraint firstItem="rMt-42-cmT" firstAttribute="leading" secondItem="1Zs-PP-lf9" secondAttribute="leading" constant="-20" id="LWX-X7-rUw"/>
+                            <constraint firstItem="iTM-vm-QLz" firstAttribute="leading" secondItem="vEO-VJ-60X" secondAttribute="leading" id="HHI-yo-KaP"/>
+                            <constraint firstItem="iTM-vm-QLz" firstAttribute="trailing" secondItem="vEO-VJ-60X" secondAttribute="trailing" id="KH9-0a-PeX"/>
                             <constraint firstItem="rLe-x0-kWu" firstAttribute="leading" secondItem="Nlf-0N-CoR" secondAttribute="leading" id="ML0-gS-Y5H"/>
+                            <constraint firstAttribute="trailing" secondItem="iTM-vm-QLz" secondAttribute="trailing" constant="40" id="MLi-MN-uxV"/>
+                            <constraint firstItem="rMt-42-cmT" firstAttribute="width" secondItem="Icq-fg-E5j" secondAttribute="width" multiplier="0.6" id="MYk-cg-X1l"/>
                             <constraint firstItem="Nlf-0N-CoR" firstAttribute="width" secondItem="rLe-x0-kWu" secondAttribute="width" id="ZUD-bD-wUm"/>
-                            <constraint firstItem="iTM-vm-QLz" firstAttribute="top" secondItem="1Zs-PP-lf9" secondAttribute="bottom" constant="6" id="by8-gI-1wn"/>
-                            <constraint firstItem="GTU-wA-RL5" firstAttribute="leading" secondItem="1Zs-PP-lf9" secondAttribute="leading" id="d3P-kw-D7F"/>
+                            <constraint firstItem="vEO-VJ-60X" firstAttribute="top" secondItem="iTM-vm-QLz" secondAttribute="bottom" constant="8" id="bIS-yJ-Nvu"/>
+                            <constraint firstItem="GTU-wA-RL5" firstAttribute="leading" secondItem="iTM-vm-QLz" secondAttribute="leading" priority="800" id="g5d-tb-uKs"/>
+                            <constraint firstItem="iTM-vm-QLz" firstAttribute="leading" secondItem="Icq-fg-E5j" secondAttribute="leading" constant="40" id="gJq-LY-JmF"/>
                             <constraint firstItem="rMt-42-cmT" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Nlf-0N-CoR" secondAttribute="trailing" priority="800" constant="150" id="hAk-6n-mI1"/>
+                            <constraint firstItem="rMt-42-cmT" firstAttribute="leading" secondItem="iTM-vm-QLz" secondAttribute="leading" constant="-20" id="iWR-nh-ZwX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rMt-42-cmT" secondAttribute="trailing" priority="800" id="mvH-hZ-p3g"/>
-                            <constraint firstAttribute="centerY" secondItem="Nlf-0N-CoR" secondAttribute="centerY" constant="-20" id="n2M-0v-hSC"/>
-                            <constraint firstItem="Nlf-0N-CoR" firstAttribute="top" secondItem="rMt-42-cmT" secondAttribute="bottom" constant="20" id="wTK-Dd-dPg"/>
+                            <constraint firstAttribute="centerY" secondItem="Nlf-0N-CoR" secondAttribute="centerY" constant="-80" id="n2M-0v-hSC"/>
+                            <constraint firstAttribute="centerX" secondItem="Nlf-0N-CoR" secondAttribute="centerX" id="nzG-xb-X3B"/>
+                            <constraint firstAttribute="centerX" secondItem="rMt-42-cmT" secondAttribute="centerX" id="sSW-nx-rPh"/>
+                            <constraint firstItem="Nlf-0N-CoR" firstAttribute="top" secondItem="rMt-42-cmT" secondAttribute="bottom" id="wTK-Dd-dPg"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="hAk-6n-mI1"/>
+                                <exclude reference="iWR-nh-ZwX"/>
                                 <exclude reference="Eey-8u-45y"/>
                             </mask>
                         </variation>
@@ -382,24 +408,34 @@ Be inspired or be inspiring.</string>
                     <connections>
                         <outlet property="_chairImageViewBottomConstraint" destination="wTK-Dd-dPg" id="AxX-ET-Tlx"/>
                         <outlet property="_chairImageViewHeightConstraint" destination="E2o-RN-S3Z" id="6YD-mF-ejD"/>
-                        <outlet property="_chairImageViewLeadingConstraint" destination="LWX-X7-rUw" id="AMi-gb-teA"/>
+                        <outlet property="_chairImageViewHorizontalCenterConstraint" destination="sSW-nx-rPh" id="BSu-s7-GsZ"/>
                         <outlet property="_chairImageViewWidthConstraint" destination="c4f-1w-eEK" id="71j-dV-9Jp"/>
                         <outlet property="_customizeButtonHeightConstraint" destination="Ukd-rf-a6l" id="8GZ-JP-jDR"/>
                         <outlet property="_customizeButtonTopConstraint" destination="Gee-rY-RdC" id="iCt-1Y-j2h"/>
                         <outlet property="_customizeButtonWidthConstraint" destination="AfU-UK-3s7" id="BbQ-Ph-UWp"/>
+                        <outlet property="_footerLogoBottomConstraint" destination="2Kn-XG-Hfn" id="kKZ-ja-YQn"/>
+                        <outlet property="_footerLogoCenterXConstraint" destination="9T0-BC-9Q9" id="rvo-9r-k4Z"/>
+                        <outlet property="_standardButtonCenterXConstraint" destination="nzG-xb-X3B" id="UUe-D7-dvH"/>
                         <outlet property="_standardButtonCenterYConstraint" destination="n2M-0v-hSC" id="F41-0p-A4H"/>
                         <outlet property="_standardButtonHeightConstraint" destination="yi5-Ya-eB7" id="HUU-P9-7QG"/>
                         <outlet property="_standardButtonWidthConstraint" destination="tsx-vo-Kb0" id="yn4-3y-Qho"/>
-                        <outlet property="_titleLabelLeadingConstraint" destination="FcB-Kf-ckL" id="f16-3f-eKb"/>
-                        <outlet property="captionLabel" destination="iTM-vm-QLz" id="vxg-9Y-CVH"/>
+                        <outlet property="_titleLabelLeadingConstraint" destination="gJq-LY-JmF" id="NxH-vn-ow4"/>
+                        <outlet property="_titleLabelTopConstraint" destination="EL7-3z-Jo3" id="hGP-wb-15c"/>
+                        <outlet property="_titleLabelTrailingConstraint" destination="MLi-MN-uxV" id="dpX-PL-cup"/>
+                        <outlet property="captionLabel" destination="vEO-VJ-60X" id="CNE-YR-GeT"/>
                         <outlet property="chairImageView" destination="rMt-42-cmT" id="NTK-RR-fqH"/>
                         <outlet property="customizeButton" destination="rLe-x0-kWu" id="B9R-LP-3cj"/>
                         <outlet property="footerLogo" destination="GTU-wA-RL5" id="M6z-TU-J5W"/>
                         <outlet property="standardButton" destination="Nlf-0N-CoR" id="cM4-gb-7AK"/>
-                        <outlet property="titleLabel" destination="1Zs-PP-lf9" id="Eql-zi-iqU"/>
+                        <outlet property="titleLabel" destination="iTM-vm-QLz" id="mHg-Ie-HSx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7L1-xl-pau" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="HFB-qC-YwO">
+                    <connections>
+                        <action selector="standardAction" destination="nP2-dp-Olk" id="oDe-dd-mDs"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1458" y="298"/>
         </scene>
@@ -1103,8 +1139,10 @@ Be inspired or be inspiring.</string>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="540" id="UdX-eV-GZC"/>
                                 </constraints>
                                 <string key="text">Coalesse partners with design professionals to help leading organizations create great places that inspire great work.
-Led by insight and driven by design, we make thoughtfully crafted furnishings that cultivate a balance between intent and intuition, beauty and utility, comfort and choice – to create destinations that bring new life to work.
-coalesse.com</string>
+
+Led by insight and driven by design, we make thoughtfully crafted furnishings that cultivate a balance between intent and intuition, beauty and utility, comfort and choice – to create destinations that bring new life to work.
+
+coalesse.com</string>
                                 <fontDescription key="fontDescription" name="Garamond" family="Garamond" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -1113,9 +1151,9 @@ Be inspired or be inspiring.</string>
                                 </connections>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Coalesse" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WiU-Hs-gd9">
-                                <rect key="frame" x="36" y="60" width="181" height="29"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <rect key="frame" x="36" y="60" width="158" height="27"/>
+                                <fontDescription key="fontDescription" name="Garamond-Bold" family="Garamond" pointSize="24"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_logo" translatesAutoresizingMaskIntoConstraints="NO" id="A4x-EJ-P7n">
@@ -1151,6 +1189,7 @@ Be inspired or be inspiring.</string>
                     <size key="freeformSize" width="600" height="536"/>
                     <connections>
                         <outlet property="aboutTextView" destination="idy-aA-ejN" id="KDg-YV-pMV"/>
+                        <outlet property="aboutTitleLabel" destination="WiU-Hs-gd9" id="mXt-jE-YcN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZmF-8A-EF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1594,10 +1633,10 @@ Be inspired or be inspiring.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="chair_custom_shadows" width="1250" height="1250"/>
+        <image name="chair_custom_shadows" width="1350" height="1350"/>
         <image name="color_crosshairs" width="32" height="32"/>
         <image name="color_hue_wheel" width="280" height="280"/>
-        <image name="default_chair" width="130" height="126"/>
+        <image name="default_chair" width="350" height="350"/>
         <image name="default_customize" width="243" height="22"/>
         <image name="default_standardcolors" width="289" height="22"/>
         <image name="header_logo" width="144" height="22"/>

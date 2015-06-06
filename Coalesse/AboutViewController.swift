@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class AboutViewController: UIViewController, UITextViewDelegate {
+	@IBOutlet weak var aboutTitleLabel: UILabel!
 	@IBOutlet weak var aboutTextView: UITextView!
 	
 	override func viewDidLoad() {
@@ -27,12 +28,14 @@ class AboutViewController: UIViewController, UITextViewDelegate {
 		
 		
 		if self.view.bounds.size.height <= 568.0 || UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+			aboutTitleLabel.font = aboutTextView.font.fontWithSize(32.0)
+			
 			var text = aboutTextView.attributedText.mutableCopy() as! NSMutableAttributedString
 			text.beginEditing()
 			text.enumerateAttribute(NSFontAttributeName, inRange: NSMakeRange(0, text.length), options: nil, usingBlock: { (let value, let range, let stop) -> Void in
 				if value != nil {
 					let oldFont = value as! UIFont;
-					let newFont = oldFont.fontWithSize((UIDevice.currentDevice().userInterfaceIdiom == .Pad ? 26.0 : 15.0))
+					let newFont = oldFont.fontWithSize((UIDevice.currentDevice().userInterfaceIdiom == .Pad ? 21.0 : 15.0))
 					text.removeAttribute(NSFontAttributeName, range: range)
 					text.addAttribute(NSFontAttributeName, value: newFont, range: range)
 				}
