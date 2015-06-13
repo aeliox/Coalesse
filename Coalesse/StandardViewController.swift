@@ -41,13 +41,8 @@ class StandardViewController: UIViewController {
 		super.willMoveToParentViewController(parent)
 		
 		if self.parentViewController != nil {
-			self.parentViewController!.navigationItem.title = nil
-			
-			let logoImageView = UIImageView(image: UIImage(named: "header_logo"))
-			logoImageView.frame = CGRectMake(0,0,144,14)
-			logoImageView.contentMode = .ScaleAspectFit
-			
-			self.parentViewController!.navigationItem.titleView = logoImageView
+			self.parentViewController!.navigationItem.titleView = nil
+			self.parentViewController!.navigationItem.title = "View Standard Colors"
 			
 			self.parentViewController!.navigationItem.rightBarButtonItem = nil
 		}

@@ -10,8 +10,10 @@ import Foundation
 import UIKit
 
 class AboutViewController: UIViewController, UITextViewDelegate {
-	@IBOutlet weak var aboutTitleLabel: UILabel!
 	@IBOutlet weak var aboutTextView: UITextView!
+	@IBOutlet weak var _aboutTextViewTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var _aboutTextViewBottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var linkTextView: UITextView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -21,14 +23,14 @@ class AboutViewController: UIViewController, UITextViewDelegate {
 		var attributedText = NSMutableAttributedString(string: text as String, attributes: [NSFontAttributeName: UIFont(name: "Garamond", size: 18.0)!, NSForegroundColorAttributeName: UIColor.blackColor()])
 		
 		attributedText.addAttributes([NSFontAttributeName: UIFont(name: "Garamond-Bold", size: 18.0)!], range: text.rangeOfString("bring new life to work"))
-		attributedText.addAttributes([NSFontAttributeName: UIFont(name: "Garamond-Bold", size: 18.0)!], range: text.rangeOfString("coalesse.com"))
 		
 		aboutTextView.text = ""
 		aboutTextView.attributedText = attributedText
 		
+		linkTextView.font = UIFont(name: "Garamond-Bold", size: 18.0)
+		
 		
 		if self.view.bounds.size.height <= 568.0 || UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-			aboutTitleLabel.font = aboutTextView.font.fontWithSize(32.0)
 			
 			var text = aboutTextView.attributedText.mutableCopy() as! NSMutableAttributedString
 			text.beginEditing()
@@ -43,6 +45,15 @@ class AboutViewController: UIViewController, UITextViewDelegate {
 			text.endEditing()
 			
 			aboutTextView.attributedText = text
+			
+			
+			linkTextView.font = UIFont(name: "Garamond-Bold", size: (UIDevice.currentDevice().userInterfaceIdiom == .Pad ? 21.0 : 15.0))
+			
+			
+			if self.view.bounds.size.height <= 480.0 {
+				_aboutTextViewTopConstraint.constant = 30.0
+				_aboutTextViewBottomConstraint.constant = 30.0
+			}
 		}
 	}
 	

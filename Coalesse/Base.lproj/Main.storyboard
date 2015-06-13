@@ -291,7 +291,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_chair" translatesAutoresizingMaskIntoConstraints="NO" id="rMt-42-cmT">
-                                <rect key="frame" x="120" y="-34" width="360" height="360"/>
+                                <rect key="frame" x="120" y="-33" width="360" height="360"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="rMt-42-cmT" secondAttribute="height" multiplier="65:63" id="3cg-e6-bKi"/>
@@ -311,11 +311,11 @@
                                 </connections>
                             </imageView>
                             <button opaque="NO" contentMode="scaleAspectFit" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nlf-0N-CoR">
-                                <rect key="frame" x="156" y="326" width="289" height="44"/>
+                                <rect key="frame" x="162" y="327" width="276" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="1K0-PR-xNB"/>
-                                    <constraint firstAttribute="width" priority="900" constant="289" id="tsx-vo-Kb0"/>
-                                    <constraint firstAttribute="height" constant="44" id="yi5-Ya-eB7"/>
+                                    <constraint firstAttribute="width" priority="900" constant="276" id="tsx-vo-Kb0"/>
+                                    <constraint firstAttribute="height" constant="42" id="yi5-Ya-eB7"/>
                                     <constraint firstAttribute="width" constant="242" id="ymC-ib-4yg"/>
                                 </constraints>
                                 <state key="normal" image="default_standardcolors">
@@ -332,10 +332,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLe-x0-kWu">
-                                <rect key="frame" x="156" y="395" width="289" height="44"/>
+                                <rect key="frame" x="162" y="394" width="276" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="900" constant="243" id="AfU-UK-3s7"/>
-                                    <constraint firstAttribute="height" constant="44" id="Ukd-rf-a6l"/>
+                                    <constraint firstAttribute="height" constant="42" id="Ukd-rf-a6l"/>
                                 </constraints>
                                 <state key="normal" image="default_customize">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -461,8 +461,8 @@ Be inspired or be inspiring.</string>
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customize" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mC-3t-ldd">
-                                        <rect key="frame" x="269" y="521" width="62" height="15"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customize Colors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mC-3t-ldd">
+                                        <rect key="frame" x="249" y="521" width="103" height="15"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="13"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1132,17 +1132,15 @@ Be inspired or be inspiring.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idy-aA-ejN">
-                                <rect key="frame" x="30" y="139" width="540" height="199"/>
+                                <rect key="frame" x="30" y="192" width="440" height="158"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="540" id="UdX-eV-GZC"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="440" id="UdX-eV-GZC"/>
                                 </constraints>
                                 <string key="text">Coalesse partners with design professionals to help leading organizations create great places that inspire great work.
 
-Led by insight and driven by design, we make thoughtfully crafted furnishings that cultivate a balance between intent and intuition, beauty and utility, comfort and choice – to create destinations that bring new life to work.
-
-coalesse.com</string>
+Led by insight and driven by design, we make thoughtfully crafted furnishings that cultivate a balance between intent and intuition, beauty and utility, comfort and choice – to create destinations that bring new life to work.</string>
                                 <fontDescription key="fontDescription" name="Garamond" family="Garamond" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -1150,19 +1148,27 @@ coalesse.com</string>
                                     <outlet property="delegate" destination="FJ0-EP-cEc" id="3of-g5-SrB"/>
                                 </connections>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Coalesse" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WiU-Hs-gd9">
-                                <rect key="frame" x="36" y="60" width="158" height="27"/>
-                                <fontDescription key="fontDescription" name="Garamond-Bold" family="Garamond" pointSize="24"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_logo" translatesAutoresizingMaskIntoConstraints="NO" id="A4x-EJ-P7n">
-                                <rect key="frame" x="36" y="464" width="100" height="22"/>
+                                <rect key="frame" x="36" y="90" width="144" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="IBQ-ie-zRJ"/>
+                                    <constraint firstAttribute="width" constant="144" id="IBQ-ie-zRJ"/>
                                     <constraint firstAttribute="height" constant="22" id="RQx-Ol-cBY"/>
                                 </constraints>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="coalesse.com" translatesAutoresizingMaskIntoConstraints="NO" id="Blk-a6-gKB">
+                                <rect key="frame" x="30" y="430" width="111" height="37"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="540" id="0dJ-r5-2Om"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Garamond-Bold" family="Garamond" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="FJ0-EP-cEc" id="td5-hS-vIO"/>
+                                </connections>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1171,25 +1177,31 @@ coalesse.com</string>
                             <constraint firstItem="A4x-EJ-P7n" firstAttribute="leading" secondItem="CtN-MP-ewW" secondAttribute="leading" constant="36" id="8XB-4J-ttT"/>
                             <constraint firstItem="idy-aA-ejN" firstAttribute="leading" secondItem="CtN-MP-ewW" secondAttribute="leading" constant="30" id="LvB-Il-xre"/>
                             <constraint firstItem="IRU-j8-FZw" firstAttribute="top" secondItem="A4x-EJ-P7n" secondAttribute="bottom" constant="50" id="MkN-Yw-fvF"/>
-                            <constraint firstItem="WiU-Hs-gd9" firstAttribute="leading" secondItem="CtN-MP-ewW" secondAttribute="leading" constant="36" id="Uil-4u-uKn"/>
+                            <constraint firstItem="idy-aA-ejN" firstAttribute="top" secondItem="A4x-EJ-P7n" secondAttribute="bottom" constant="80" id="Nf9-ey-c2b"/>
                             <constraint firstItem="A4x-EJ-P7n" firstAttribute="top" relation="greaterThanOrEqual" secondItem="uDJ-LF-8ap" secondAttribute="bottom" constant="20" id="YvH-7J-BQF"/>
+                            <constraint firstItem="Blk-a6-gKB" firstAttribute="top" secondItem="idy-aA-ejN" secondAttribute="bottom" constant="80" id="aAd-eD-Lkd"/>
+                            <constraint firstItem="idy-aA-ejN" firstAttribute="leading" secondItem="Blk-a6-gKB" secondAttribute="leading" id="eKu-Ug-ESf"/>
+                            <constraint firstItem="A4x-EJ-P7n" firstAttribute="top" secondItem="uDJ-LF-8ap" secondAttribute="bottom" constant="70" id="eQE-zt-40W"/>
                             <constraint firstAttribute="centerY" secondItem="idy-aA-ejN" secondAttribute="centerY" priority="800" constant="30" id="r1O-gB-fFw"/>
-                            <constraint firstItem="WiU-Hs-gd9" firstAttribute="top" secondItem="uDJ-LF-8ap" secondAttribute="bottom" constant="40" id="wzG-7Z-7gl"/>
                             <constraint firstItem="idy-aA-ejN" firstAttribute="top" secondItem="A4x-EJ-P7n" secondAttribute="bottom" constant="35" id="z6J-Px-FdG"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="z6J-Px-FdG"/>
                                 <exclude reference="2rk-XJ-MbF"/>
                                 <exclude reference="YvH-7J-BQF"/>
+                                <exclude reference="r1O-gB-fFw"/>
+                                <exclude reference="z6J-Px-FdG"/>
+                                <exclude reference="MkN-Yw-fvF"/>
                             </mask>
                         </variation>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="536"/>
                     <connections>
+                        <outlet property="_aboutTextViewBottomConstraint" destination="aAd-eD-Lkd" id="YsN-Rp-ukT"/>
+                        <outlet property="_aboutTextViewTopConstraint" destination="Nf9-ey-c2b" id="AcN-cm-UN4"/>
                         <outlet property="aboutTextView" destination="idy-aA-ejN" id="KDg-YV-pMV"/>
-                        <outlet property="aboutTitleLabel" destination="WiU-Hs-gd9" id="mXt-jE-YcN"/>
+                        <outlet property="linkTextView" destination="Blk-a6-gKB" id="aeB-jy-mki"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZmF-8A-EF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1220,8 +1232,8 @@ coalesse.com</string>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Standard Color Choices" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PdZ-qO-atG">
-                                        <rect key="frame" x="230" y="520" width="140" height="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Standard Colors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PdZ-qO-atG">
+                                        <rect key="frame" x="237" y="520" width="126" height="16"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
