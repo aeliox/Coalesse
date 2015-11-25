@@ -80,6 +80,20 @@
 			remoteGlobalIDString = BCE209E41943F20C002FEED8;
 			remoteInfo = GPUImageFramework;
 		};
+		55F1235B1C05125D005C2934 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55F123551C05125D005C2934 /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCF1A33414DDB1EC00852800;
+			remoteInfo = GPUImage;
+		};
+		55F1235D1C05125D005C2934 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55F123551C05125D005C2934 /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCE209E51943F20C002FEED8;
+			remoteInfo = GPUImageFramework;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -144,6 +158,7 @@
 		38F76D431AC927C6005F4852 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		484EE1B697C597C328D5BAD5 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E00B833440A9393A48C6280 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		55F123551C05125D005C2934 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = ../GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 		5AA5A84F91DA28122F7B4699 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -186,6 +201,7 @@
 		3803BA3D1AB34F2B00EE1C52 = {
 			isa = PBXGroup;
 			children = (
+				55F123551C05125D005C2934 /* GPUImage.xcodeproj */,
 				3803BA481AB34F2B00EE1C52 /* Coalesse */,
 				3803BA5E1AB34F2B00EE1C52 /* CoalesseTests */,
 				3803BA471AB34F2B00EE1C52 /* Products */,
@@ -319,6 +335,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		55F123561C05125D005C2934 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55F1235C1C05125D005C2934 /* libGPUImage.a */,
+				55F1235E1C05125D005C2934 /* GPUImage.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9C1FAA016B6384882E17CF96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -425,6 +450,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 55F123561C05125D005C2934 /* Products */;
+					ProjectRef = 55F123551C05125D005C2934 /* GPUImage.xcodeproj */;
+				},
+				{
 					ProductGroup = 3803BA7B1AB34FF000EE1C52 /* Products */;
 					ProjectRef = 3803BA7A1AB34FF000EE1C52 /* GPUImage.xcodeproj */;
 				},
@@ -450,6 +479,20 @@
 			fileType = wrapper.framework;
 			path = GPUImage.framework;
 			remoteRef = 3803BA821AB34FF100EE1C52 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		55F1235C1C05125D005C2934 /* libGPUImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGPUImage.a;
+			remoteRef = 55F1235B1C05125D005C2934 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		55F1235E1C05125D005C2934 /* GPUImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GPUImage.framework;
+			remoteRef = 55F1235D1C05125D005C2934 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
